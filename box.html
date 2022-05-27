@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>box-model</title>
+    <style>
+      /* h1을 테두리로 감았을 때 테두리가 화면 끝가지 가는 것은 h1태그는 화면 전체를 사용하기 때문
+      이것을 block level element라고 함*/
+      h1{
+        border: 5px red solid;
+        padding:20px;
+        margin:10px;
+        width:100px
+        /*border-width:5px;
+        border-color:red;
+        border-style: solid;
+        display:inline;이 문장을 추가해주면 a형태처럼 해당 문자만 사용
+        padding은 테두리와 문자 사이에 여백을 줄 때 사용*/
+      }
+      /* h1태그 테두리와 다르게 a태그는 지정된 문자만 테두리로 감아짐. a태그는 자기자신의 부피만 사용하기 때문
+      이것을 inline element라고 함*/
+     /*
+      a{
+        border-width:5px;
+        border-color:red;
+        border-style: solid;
+        display:block;이 문장을 추가해주면 h1형태처럼 해당 문자만 사용
+
+        h1, a{
+        border-width:5px;
+        border-color:red;
+        border-style: solid;
+        } 이런 식으로 ,를 활용하면 내용이 같을 경우 중복을 줄이고 하나로 합칠 수도 있음   */
+      }
+
+    </style>
+  </head>
+  <body>
+    <h1>HTML</h1>
+    <h1>HTML</h1>
+    <!--<a href='https://terms.naver.com/entry.naver?docId=1168097&cid=40942&categoryId=32838' target='_blank'>HTML</a>-->
+  </body>
+</html>
