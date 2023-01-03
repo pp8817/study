@@ -1,6 +1,6 @@
 public class SwitchExercisesRunner {
  public static void main(String[] args) {
-  System.out.println(isWeekDay(1));
+  System.out.println(determineNameOfDay(1));
  } 
 
  public static boolean isWeekDay(int dayNumber){
@@ -17,7 +17,7 @@ public class SwitchExercisesRunner {
  }
 
  public static String determineNameOfDay(int dayNumber){
-  String result = "";
+  // String result = "";
   switch(dayNumber){
     case 0: return "Sunday";
     case 1: return "Monday"; 
