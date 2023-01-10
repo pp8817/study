@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class whileNumberPlayerRunner {
   public static void main(String[] args) {
     WhileNumberPlayer player = new WhileNumberPlayer(30);
@@ -7,6 +9,9 @@ public class whileNumberPlayerRunner {
 
     player.printCubesUptoLimit();
     //For limit = 30, output world be 1 8 27
+
+    LocalDate now = LocalDate.now();
+    System.out.println(now);
   }
 }
 
