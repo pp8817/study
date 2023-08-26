@@ -25,6 +25,7 @@ public class Board {
         this.author = author;
     }
 
+    //기본 생성자 추가
     public Board() {
 
     }
