@@ -20,9 +20,8 @@ public class BoardService {
         return boardRepository.findAll();
     }
 
-    public void save(Board board) {
-        boardRepository.save(board);
-
+    public Board save(Board board) {
+        return boardRepository.save(board);
     }
 
     public void delete(Integer id) {
@@ -34,8 +33,8 @@ public class BoardService {
         board.setTitle(updateBoard.getTitle());
         board.setAuthor(updateBoard.getAuthor());
         board.setContent(updateBoard.getContent());
-
-        boardRepository.save(board);
     }
+
+
 
 }
