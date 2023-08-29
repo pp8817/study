@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDateTime;
+
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
@@ -29,12 +31,14 @@ public class BoardController {
     public String boardWrite(Board board, Model model) {
 
         boardService.save(board);
-
+//        model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
 
         return "message";
+//        return "redirect:/board/list";
     }
+
 
     @GetMapping("/board/list")
     public String boardListForm(Model model) {
@@ -73,5 +77,8 @@ public class BoardController {
 
         return "message";
 
+////        model.addAttribute("localDateTime", LocalDateTime.now());
+//
+//        return "redirect:/board/list";
     }
 }

@@ -67,6 +67,13 @@
                 <a th:href="@{/board/post/{id}(id=${post.id})}" th:text="${post.title}">게시글 제목</a>
             </h2>
             <p th:text="'작성자: ' + ${post.author}">작성자: 작성자 이름</p>
+<!--            <span th:text="'작성 시간: ' + ${post.getCreatedDate()}"></span>-->
+            <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'MM-dd')}"></span>
+
+<!--            <span th:if="${post.getCreatedDate() != post.getModifiedDate()}">-->
+<!--                <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'MM-dd')}"></span><br>-->
+<!--                <span th:text="'수정 시간: ' + ${#temporals.format(post.getModifiedDate(), 'MM-dd')}"></span>-->
+<!--            </span>-->
         </div>
     </div>
 </div>

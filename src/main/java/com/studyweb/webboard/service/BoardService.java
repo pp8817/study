@@ -29,10 +29,14 @@ public class BoardService {
     }
 
     public void update(Integer id, Board updateBoard) {
+        System.out.println("updateBoard = " + updateBoard);
+
         Board board = boardRepository.findById(id).get();
         board.setTitle(updateBoard.getTitle());
         board.setAuthor(updateBoard.getAuthor());
         board.setContent(updateBoard.getContent());
+
+        boardRepository.save(board);
     }
 
 
