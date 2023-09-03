@@ -3,6 +3,8 @@ package com.studyweb.webboard.service;
 import com.studyweb.webboard.entity.Board;
 import com.studyweb.webboard.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,12 @@ public class BoardService {
         return boardRepository.findById(id).get();
     }
 
-    public List<Board> boardList() {
-        return boardRepository.findAll();
+    public Page<Board> boardList(Pageable pageable) {
+        return boardRepository.findAll(pageable);
+    }
+
+    public Page<Board> boardSearchList(String searchKeyword, Pageable pageable) {
+        return boardRepository.findByTitleContaining(searchKeyword, pageable);
     }
 
     public Board save(Board board) {
