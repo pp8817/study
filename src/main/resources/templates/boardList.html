@@ -55,6 +55,56 @@
             text-decoration: none;
             margin-right: 10px;
         }
+
+        /* 검색 부분의 CSS */
+        .search-container {
+            margin-top: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-label {
+            margin-right: 10px;
+        }
+
+        .search-input {
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+
+        .search-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 5px 10px;
+            cursor: pointer;
+
+        }
+
+        /* 페이지 링크 스타일 */
+        .page-link {
+            display: inline-block;
+            padding: 5px 10px;
+            margin-right: 5px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border: 1px solid #007bff;
+            border-radius: 4px;
+        }
+
+        .page-link:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        /* 현재 페이지 스타일 */
+        .current-page {
+            color: #dc3545;
+        }
     </style>
 </head>
 <body>
@@ -67,25 +117,24 @@
                 <a th:href="@{/board/post/{id}(id=${post.id})}" th:text="${post.title}">게시글 제목</a>
             </h2>
             <p th:text="'작성자: ' + ${post.author}">작성자: 작성자 이름</p>
-<!--            <span th:text="'작성 시간: ' + ${post.getCreatedDate()}"></span>-->
             <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'YY-MM-dd')}"></span>
-
-<!--            <span th:if="${post.getCreatedDate() != post.getModifiedDate()}">-->
-<!--                <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'MM-dd')}"></span><br>-->
-<!--                <span th:text="'수정 시간: ' + ${#temporals.format(post.getModifiedDate(), 'MM-dd')}"></span>-->
-<!--            </span>-->
         </div>
     </div>
+<!--    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">-->
+<!--        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>-->
+<!--        <strong th:if="${page == nowPage}" th:text="${page}" style="color: #dc3545"></strong>-->
+<!--    </th:block>-->
     <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>
-        <strong th:if="${page == nowPage}" th:text="${page}" style="color: #dc3545"></strong>
+        <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}" class="page-link"></a>
+        <strong th:if="${page == nowPage}" th:text="${page}" class="current-page"></strong>
     </th:block>
 
     <form th:action="@{/board/list}" method="get">
-        <label>
-            <input type="text" name ="searchKeyword">
-        </label>
-        <button type="submit">검색</button>
+        <div class="search-container">
+            <label class="search-label" for="searchKeyword">검색어:</label>
+            <input class="search-input" type="text" id="searchKeyword" name="searchKeyword" />
+            <button class="search-button" type="submit">검색</button>
+        </div>
     </form>
 
 </div>
