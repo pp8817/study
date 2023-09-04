@@ -84,8 +84,14 @@
 
         }
 
-        /* 페이지 링크 스타일 */
-        .page-link {
+        /* 페이징 스타일 */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .page-link,
+        .current-page {
             display: inline-block;
             padding: 5px 10px;
             margin-right: 5px;
@@ -94,6 +100,7 @@
             color: white;
             border: 1px solid #007bff;
             border-radius: 4px;
+            cursor: pointer;
         }
 
         .page-link:hover {
@@ -101,10 +108,11 @@
             border-color: #0056b3;
         }
 
-        /* 현재 페이지 스타일 */
         .current-page {
-            color: #dc3545;
+            background-color: #dc3545;
+            border-color: #dc3545;
         }
+
     </style>
 </head>
 <body>
@@ -124,10 +132,15 @@
 <!--        <a th:if="${page != nowPage}" th:href="@{/board/list(page = ${page - 1}, searchKeyword = ${param.searchKeyword})}" th:text="${page}"></a>-->
 <!--        <strong th:if="${page == nowPage}" th:text="${page}" style="color: #dc3545"></strong>-->
 <!--    </th:block>-->
-    <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
-        <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}" class="page-link"></a>
-        <strong th:if="${page == nowPage}" th:text="${page}" class="current-page"></strong>
-    </th:block>
+
+    <!-- 페이징 부분 -->
+    <div class="pagination">
+        <th:block th:each="page : ${#numbers.sequence(startPage, endPage)}">
+            <a th:if="${page != nowPage}" th:href="@{/board/list(page=${page - 1}, searchKeyword=${param.searchKeyword})}" th:text="${page}" class="page-link"></a>
+            <strong th:if="${page == nowPage}" th:text="${page}" class="current-page"></strong>
+        </th:block>
+    </div>
+
 
     <form th:action="@{/board/list}" method="get">
         <div class="search-container">
