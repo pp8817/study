@@ -84,6 +84,7 @@
             <span th:text="'수정 시간: ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd HH:mm:ss')}"></span>
         </span>
         <p th:text="'내용: ' + ${post.content}">내용: 게시글 내용...</p>
+        <a th:href="@{${post.filepath}}">사진</a>
     </div>
 </div>
 </body>

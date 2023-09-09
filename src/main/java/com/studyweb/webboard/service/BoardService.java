@@ -6,8 +6,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -26,23 +30,40 @@ public class BoardService {
         return boardRepository.findByTitleContaining(searchKeyword, pageable);
     }
 
-    public Board save(Board board) {
-        return boardRepository.save(board);
+    public void save(Board board, MultipartFile file) throws Exception {
+
+        //저장할 경로를 지정
+        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
+
+        // 랜덤 식별자 생성
+        UUID uuid = UUID.randomUUID();
+
+        // uuid + _ + 파일의 원래 이름
+        String fileName = uuid + "_" + file.getOriginalFilename();
+
+        //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
+        File saveFile = new File(projectPath, fileName);
+
+        file.transferTo(saveFile);
+
+        board.setFilename(fileName); //DB에 filename 저장
+        board.setFilepath("/files/" + fileName);
+
+        boardRepository.save(board);
     }
 
     public void delete(Integer id) {
         boardRepository.deleteById(id);
     }
 
-    public void update(Integer id, Board updateBoard) {
-        System.out.println("updateBoard = " + updateBoard);
+    public void update(Integer id, Board updateBoard, MultipartFile file) throws Exception {
 
         Board board = boardRepository.findById(id).get();
         board.setTitle(updateBoard.getTitle());
         board.setAuthor(updateBoard.getAuthor());
         board.setContent(updateBoard.getContent());
 
-        boardRepository.save(board);
+        save(board, file);
     }
 
 

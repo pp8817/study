@@ -12,8 +12,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.time.LocalDateTime;
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -32,9 +33,9 @@ public class BoardController {
     }
 
     @PostMapping("/board/write")
-    public String boardWrite(Board board, Model model) {
+    public String boardWrite(Board board, Model model, MultipartFile file) throws Exception {
 
-        boardService.save(board);
+        boardService.save(board, file);
 //        model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/list");
@@ -92,16 +93,16 @@ public class BoardController {
     }
 
     @PostMapping("/board/post/update/{id}")
-    public String postUpdate(@PathVariable Integer id, Board board, Model model) {
-        boardService.update(id, board);
+    public String postUpdate(@PathVariable Integer id, Board board, Model model, MultipartFile file) throws Exception {
+        boardService.update(id, board, file);
 
         model.addAttribute("message", "게시글 수정이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/post/" + id);
 
         return "message";
 
-////        model.addAttribute("localDateTime", LocalDateTime.now());
-//
+//        model.addAttribute("localDateTime", LocalDateTime.now());
+
 //        return "redirect:/board/list";
     }
 }

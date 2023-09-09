@@ -1,13 +1,11 @@
 package com.studyweb.webboard.entity;
 
 import lombok.Data;
-import lombok.Getter;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
@@ -20,6 +18,9 @@ public class Board extends TimeEntity{
     private String title;
     private String content;
     private String author;
+
+    private String filename;
+    private String filepath;
 
     //수정을 위한 생성자
     public Board(String title, String content, String author) {
