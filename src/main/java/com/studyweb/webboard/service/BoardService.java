@@ -62,8 +62,6 @@ public class BoardService {
         board.update(updateBoard.getTitle(), updateBoard.getContent());
 
         if (file.isEmpty()) {
-            System.out.println("filename = " + board.getFilename());
-            System.out.println("Filepath = " + board.getFilepath());
 
             boardRepository.save(board);
 

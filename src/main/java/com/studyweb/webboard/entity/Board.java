@@ -13,8 +13,6 @@ public class Board extends TimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-
-    @Column(length = 40)
     private String title;
     private String content;
     private String author;
