@@ -1,11 +1,9 @@
 package com.studyweb.webboard.entity;
 
+import lombok.Builder;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -15,6 +13,8 @@ public class Board extends TimeEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+
+    @Column(length = 40)
     private String title;
     private String content;
     private String author;
@@ -22,11 +22,18 @@ public class Board extends TimeEntity{
     private String filename;
     private String filepath;
 
+
     //수정을 위한 생성자
+    @Builder
     public Board(String title, String content, String author) {
         this.title = title;
         this.content = content;
         this.author = author;
+    }
+
+    public void update(String title, String content) {
+        this.title = title;
+        this.content = content;
     }
 
     //기본 생성자 추가!

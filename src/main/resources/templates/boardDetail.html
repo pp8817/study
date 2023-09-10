@@ -72,8 +72,7 @@
 
     <div class="post">
         <h2 class="title" th:text="${post.title}">게시글 제목</h2>
-        <p th:text="'작성자: ' + ${post.author}">작성자: 작성자 이름</p>
-
+        <p th:text="'작성자: ' + ${post.author}" >작성자: 작성자 이름</p>
 
         <span th:if="${post.getCreatedDate() == post.getModifiedDate()}">
             <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd HH:mm:ss')}"></span>

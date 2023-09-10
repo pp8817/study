@@ -33,7 +33,7 @@ public class BoardService {
     public void save(Board board, MultipartFile file) throws Exception {
 
         //저장할 경로를 지정
-        String projectPath = System.getProperty("user.dir") + "/src/main/resources/static/files";
+        String projectPath = getProjectPath();
 
         // 랜덤 식별자 생성
         UUID uuid = UUID.randomUUID();
@@ -59,13 +59,39 @@ public class BoardService {
     public void update(Integer id, Board updateBoard, MultipartFile file) throws Exception {
 
         Board board = boardRepository.findById(id).get();
-        board.setTitle(updateBoard.getTitle());
-        board.setAuthor(updateBoard.getAuthor());
-        board.setContent(updateBoard.getContent());
+        board.update(updateBoard.getTitle(), updateBoard.getContent());
 
-        save(board, file);
+        if (file.isEmpty()) {
+            System.out.println("filename = " + board.getFilename());
+            System.out.println("Filepath = " + board.getFilepath());
+
+            boardRepository.save(board);
+
+        } else {
+            //저장할 경로를 지정
+            String projectPath = getProjectPath();
+
+            // 랜덤 식별자 생성
+            UUID uuid = UUID.randomUUID();
+
+            // uuid + _ + 파일의 원래 이름
+            String fileName = uuid + "_" + file.getOriginalFilename();
+
+            //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
+            File saveFile = new File(projectPath, fileName);
+
+            file.transferTo(saveFile);
+
+            board.setFilename(fileName); //DB에 filename 저장
+            board.setFilepath("/files/" + fileName);
+
+            boardRepository.save(board);
+        }
     }
 
+    private static String getProjectPath() {
+        return System.getProperty("user.dir") + "/src/main/resources/static/files";
+    }
 
 
 }
