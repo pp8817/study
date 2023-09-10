@@ -58,7 +58,8 @@
   <form th:action="@{/board/post/update/{id}(id=${post.id})}" method="post" enctype="multipart/form-data">
     <div class="form-group">
       <label for="title">제목</label>
-      <input type="text" id="title" name="title" th:value="${post.title}" required>
+      <input type="text" id="title" name="title" th:value="${post.title}" required onkeyup="checkTitleLength()">
+      <span id="titleLengthMessage"></span>
     </div>
     <div class="form-group">
       <label for="author">작성자</label>
@@ -71,8 +72,27 @@
       <input type="file" name="file">
     </div>
 
-    <button type="submit" class="btn">수정 완료</button>
+    <button type="submit" class="btn" id="submitButton">수정하기</button>
   </form>
 </div>
+
+<script>
+  function checkTitleLength() {
+    var titleInput = document.getElementById("title");
+    var submitButton = document.getElementById("submitButton");
+    var titleLengthMessage = document.getElementById("titleLengthMessage");
+
+    if (titleInput.value.length > 20) {
+      titleLengthMessage.innerText = "제목은 20자 이하여야 합니다.";
+      submitButton.disabled = true;
+      submitButton.style.backgroundColor = "#ccc"; // 배경색을 회색(#ccc)으로 변경
+    } else {
+      titleLengthMessage.innerText = "";
+      submitButton.disabled = false;
+      submitButton.style.backgroundColor = "#007bff"; // 기본 배경색으로 변경
+    }
+  }
+</script>
+
 </body>
 </html>
