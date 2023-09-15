@@ -3,6 +3,8 @@ package com.studyweb.webboard.service;
 import com.studyweb.webboard.entity.Board;
 import com.studyweb.webboard.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -13,10 +15,14 @@ import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
+
+    @Value("${file.dir}")
+    private String fileDir;
 
     public Board findById(Integer id) {
         return boardRepository.findById(id).get();
@@ -32,22 +38,25 @@ public class BoardService {
 
     public void save(Board board, MultipartFile file) throws Exception {
 
-        //저장할 경로를 지정
-        String projectPath = getProjectPath();
+        if(!file.isEmpty()){ //파일 업로드가 있는 경우에만 실행
+            //저장할 경로를 지정
+//        String projectPath = fileDir;
 
-        // 랜덤 식별자 생성
-        UUID uuid = UUID.randomUUID();
+            // 랜덤 식별자 생성
+            UUID uuid = UUID.randomUUID();
 
-        // uuid + _ + 파일의 원래 이름
-        String fileName = uuid + "_" + file.getOriginalFilename();
+            // uuid + _ + 파일의 원래 이름
+            String fileName = uuid + "_" + file.getOriginalFilename();
 
-        //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
-        File saveFile = new File(projectPath, fileName);
+            //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
+            File saveFile = new File(fileDir, fileName);
 
-        file.transferTo(saveFile);
+            file.transferTo(saveFile); //파일 저장
 
-        board.setFilename(fileName); //DB에 filename 저장
-        board.setFilepath("/files/" + fileName);
+            board.setFilename(fileName); //DB에 filename 저장
+            board.setFilepath("/files/" + fileName);
+        }
+
 
         boardRepository.save(board);
     }
@@ -67,7 +76,7 @@ public class BoardService {
 
         } else {
             //저장할 경로를 지정
-            String projectPath = getProjectPath();
+//            String projectPath = fileDir;
 
             // 랜덤 식별자 생성
             UUID uuid = UUID.randomUUID();
@@ -76,7 +85,7 @@ public class BoardService {
             String fileName = uuid + "_" + file.getOriginalFilename();
 
             //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
-            File saveFile = new File(projectPath, fileName);
+            File saveFile = new File(fileDir, fileName);
 
             file.transferTo(saveFile);
 
