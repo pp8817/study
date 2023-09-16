@@ -1,26 +1,36 @@
 package com.studyweb.webboard.controller;
 
 import com.studyweb.webboard.domain.Board;
+import com.studyweb.webboard.file.FileStore;
 import com.studyweb.webboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.util.UriUtils;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequiredArgsConstructor
 public class BoardController {
 
     private final BoardService boardService;
+    private final FileStore fileStore;
 
     @GetMapping("/")
     public String mainPage() {
@@ -44,6 +54,35 @@ public class BoardController {
 //        return "redirect:/board/list";
     }
 
+    /**
+     * 파일 업로드, 다운로드 컨트롤러
+     */
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        // "file:/Users/../0d713e88-4723-4088-bb4b-be039b6f9b47.png"
+        //경로에 있는 파일에 접근해서 파일을 스트림?으로 반환을 함
+        return new UrlResource("file:" + fileStore.getFullPath(filename));
+    }
+
+    @GetMapping("/attach/{postId}")
+    public ResponseEntity<Resource> downloadAttach(@PathVariable Integer postId) throws MalformedURLException {
+        Board post = boardService.findById(postId); //post를 접근할 수 있는 사용자만 사진 다운로드 가능
+        String imageFilename = post.getFilename(); //사용자가 업로드한 파일 이름
+        String imageFilepath = post.getFilepath(); //DB에 저장하는 파일 경로
+
+        UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(imageFilepath));
+        System.out.println("resource = " + resource);
+
+        String encodedUploadFileName = UriUtils.encode(imageFilename, StandardCharsets.UTF_8); // 한글, 특수문자가 깨지는 것을 방지
+        String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
+
+        return ResponseEntity.ok()
+                .header(HttpHeaders.CONTENT_DISPOSITION, contentDisposition)
+                .body(resource);
+    }
+
+    /****************/
 
     @GetMapping("/board/list")
     public String boardListForm(Model model, @PageableDefault(page = 0, size = 9, sort = "id",

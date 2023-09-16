@@ -21,8 +21,8 @@ public class Board extends TimeEntity {
 //    private String attachName;
 //    private String attachPath;
 
-    private String filename;
-    private String filepath;
+    private String filename; //시용자가 업로드한 파일 이름
+    private String filepath; // DB에  저장되는 파일 이름(UUID 추가)
 
     public void update(String title, String content) {
         this.title = title;

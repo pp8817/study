@@ -85,7 +85,12 @@
 
         <p th:text="'내용: ' + ${post.content}">내용: 게시글 내용...</p>
 <!--        <a th:href="@{${post.filepath}}">첨부파일 기능 구현중..</a>-->
-        <img th:if="${post.filepath != null}" th:src="@{${post.filepath}}" width="300" height="300"/>
+        <span th:if="${post.filepath != null}">
+            <img th:src="@{'/images/' + ${post.filepath}}" width="300" height="300"/><br>
+            <!--   파일 다운로드   -->
+            사진 다운로드: <a th:href="|/attach/${post.id}|" th:text="${post.getFilename()}"/>
+        </span>
+
     </div>
 
 </div>
