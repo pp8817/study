@@ -1,4 +1,4 @@
-package com.studyweb.webboard.entity;
+package com.studyweb.webboard.domain.time;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

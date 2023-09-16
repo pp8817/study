@@ -84,7 +84,8 @@
         </span>
 
         <p th:text="'내용: ' + ${post.content}">내용: 게시글 내용...</p>
-        <a th:href="@{${post.filepath}}">사진</a>
+<!--        <a th:href="@{${post.filepath}}">첨부파일 기능 구현중..</a>-->
+        <img th:if="${post.filepath != null}" th:src="@{${post.filepath}}" width="300" height="300"/>
     </div>
 
 </div>

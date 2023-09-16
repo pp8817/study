@@ -1,6 +1,8 @@
 package com.studyweb.webboard.service;
 
-import com.studyweb.webboard.entity.Board;
+import com.studyweb.webboard.domain.Board;
+import com.studyweb.webboard.domain.UploadFile;
+import com.studyweb.webboard.file.FileStore;
 import com.studyweb.webboard.repository.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -20,6 +22,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class BoardService {
     private final BoardRepository boardRepository;
+    private final FileStore fileStore;
 
     @Value("${file.dir}")
     private String fileDir;
@@ -43,18 +46,21 @@ public class BoardService {
 //        String projectPath = fileDir;
 
             // 랜덤 식별자 생성
-            UUID uuid = UUID.randomUUID();
-
-            // uuid + _ + 파일의 원래 이름
-            String fileName = uuid + "_" + file.getOriginalFilename();
-
-            //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
-            File saveFile = new File(fileDir, fileName);
-
-            file.transferTo(saveFile); //파일 저장
-
-            board.setFilename(fileName); //DB에 filename 저장
-            board.setFilepath("/files/" + fileName);
+//            UUID uuid = UUID.randomUUID();
+//
+//            // uuid + _ + 파일의 원래 이름
+//            String fileName = uuid + "_" + file.getOriginalFilename();
+//
+//            //파일을 생성할 것인데 경로는 projectPath, 이름은 filename로 담긴다는 뜻
+//            File saveFile = new File(fileDir, fileName);
+//
+//            file.transferTo(saveFile); //파일 저장
+//
+//            board.setFilename(fileName); //DB에 filename 저장
+//            board.setFilepath("/files/" + fileName);
+            UploadFile uploadFile = fileStore.storeFile(file);
+            board.setFilename(uploadFile.getUploadFilName());
+            board.setFilepath("/files/"+uploadFile.getStoreFileName());
         }
 
 

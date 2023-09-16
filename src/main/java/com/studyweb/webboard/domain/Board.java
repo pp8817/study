@@ -1,13 +1,14 @@
-package com.studyweb.webboard.entity;
+package com.studyweb.webboard.domain;
 
-import lombok.Builder;
+import com.studyweb.webboard.domain.time.TimeEntity;
 import lombok.Data;
+import java.util.List;
 
 import javax.persistence.*;
 
 @Entity
 @Data
-public class Board extends TimeEntity{
+public class Board extends TimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,17 +18,11 @@ public class Board extends TimeEntity{
     private String content;
     private String author;
 
+//    private String attachName;
+//    private String attachPath;
+
     private String filename;
     private String filepath;
-
-
-    //수정을 위한 생성자
-    @Builder
-    public Board(String title, String content, String author) {
-        this.title = title;
-        this.content = content;
-        this.author = author;
-    }
 
     public void update(String title, String content) {
         this.title = title;

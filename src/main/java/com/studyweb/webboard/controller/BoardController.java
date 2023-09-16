@@ -1,6 +1,6 @@
 package com.studyweb.webboard.controller;
 
-import com.studyweb.webboard.entity.Board;
+import com.studyweb.webboard.domain.Board;
 import com.studyweb.webboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
