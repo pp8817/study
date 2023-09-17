@@ -87,7 +87,7 @@
             var titleLengthMessage = document.getElementById("titleLengthMessage");
             var authorLengthMessage = document.getElementById("authorLengthMessage");
 
-            if (titleInput.value.length > 20 || authorInput.value.length > 10) {
+            if (titleInput.value.length > 40 || authorInput.value.length > 10) {
                 submitButton.disabled = true;
                 submitButton.style.backgroundColor = "#ccc";
             } else {
@@ -95,19 +95,18 @@
                 submitButton.style.backgroundColor = "#007bff";
             }
 
-            if (titleInput.value.length > 20) {
-                titleLengthMessage.innerText = "제목은 20자 이하여야 합니다.";
+            if (titleInput.value.length > 40) {
+                titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";
             } else {
                 titleLengthMessage.innerText = "";
             }
 
             if (authorInput.value.length > 10) {
-                authorLengthMessage.innerText = "작성자 이름은 10자 이하여야 합니다.";
+                authorLengthMessage.innerText = "작성자는 10자 이하만 가능합니다.";
             } else {
                 authorLengthMessage.innerText = "";
             }
         }
-    </script>
     </script>
 
 </div>

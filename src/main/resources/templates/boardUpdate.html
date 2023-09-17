@@ -72,7 +72,6 @@
       <label for="content">내용</label>
       <textarea id="content" th:field="*{content}" rows="8" required></textarea>
       <!--파일 업로드 부분 추가-->
-      <a th:href="@{${post.filepath}}">사진</a>
       <input type="file" name="file">
       <!--                -->
     </div>
@@ -87,8 +86,8 @@
     var submitButton = document.getElementById("submitButton");
     var titleLengthMessage = document.getElementById("titleLengthMessage");
 
-    if (titleInput.value.length > 20) {
-      titleLengthMessage.innerText = "제목은 20자 이하여야 합니다.";
+    if (titleInput.value.length > 40) {
+      titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";
       submitButton.disabled = true;
       submitButton.style.backgroundColor = "#ccc"; // 배경색을 회색(#ccc)으로 변경
     } else {

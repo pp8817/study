@@ -40,14 +40,14 @@ public class FileStore {
         }
 
         String originalFilename = multipartFile.getOriginalFilename();
-        String storeFileName = createStoreFileName(originalFilename); //랜덤의 uuid를 추가한 파일 이름
-        multipartFile.transferTo(new File(getFullPath(storeFileName)));
+        String serverFileName = createServerFileName(originalFilename); //랜덤의 uuid를 추가한 파일 이름
+        multipartFile.transferTo(new File(getFullPath(serverFileName)));
 
-        return new UploadFile(originalFilename, storeFileName);
+        return new UploadFile(originalFilename, serverFileName);
     }
 
     // 서버 내부에서 관리하는 파일명은 유일한 이름을 생성하는 UUID를 사용해서 충돌하지 않도록 한다.
-    private String createStoreFileName(String originalFilename) {
+    private String createServerFileName(String originalFilename) {
         String ext = extractExt(originalFilename);
         String uuid = UUID.randomUUID().toString(); //파일 이름 중복 방지
         return uuid + "." + ext;
