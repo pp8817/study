@@ -50,7 +50,11 @@
         }
 
         .time {
-            float: left;
+            float: left; /* 시간을 왼쪽으로 띄움 */
+            clear: both; /* 시간 위에 다른 요소가 없도록 */
+            margin-right: 10px; /* 시간과 내용 사이 간격 추가 */
+            position: absolute;
+            top: 10px; /* 간격 조정 */
         }
 
         .title {
@@ -72,16 +76,18 @@
 
     <div class="post">
         <h2 class="title" th:text="${post.title}">게시글 제목</h2>
+
         <p th:text="'작성자: ' + ${post.author}" >작성자: 작성자 이름</p>
 
-        <span th:if="${post.getCreatedDate() == post.getModifiedDate()}">
-            <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd HH:mm:ss')}"></span>
-        </span>
-
-        <span th:if="${post.getCreatedDate() != post.getModifiedDate()}">
-            <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd HH:mm:ss')}"></span><br>
-            <span th:text="'수정 시간: ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd HH:mm:ss')}"></span>
-        </span>
+        <div class="time"> <!-- 변경된 부분 -->
+            <span th:if="${post.getCreatedDate() == post.getModifiedDate()}"
+                  th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+            <span th:if="${post.getCreatedDate() != post.getModifiedDate()}"
+                  th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+            <br>
+            <span th:if="${post.getCreatedDate() != post.getModifiedDate()}"
+                  th:text="'수정 시간: ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+        </div>
 
         <p th:text="'내용: ' + ${post.content}">내용: 게시글 내용...</p>
 <!--        <a th:href="@{${post.filepath}}">첨부파일 기능 구현중..</a>-->

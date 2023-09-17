@@ -41,14 +41,15 @@ public class BoardController {
 
     @PostMapping("/board/write")
     public String boardWrite(@ModelAttribute Board board, Model model, MultipartFile file) throws Exception {
-
         boardService.save(board, file);
+        Integer id = board.getId();
+
 //        model.addAttribute("localDateTime", LocalDateTime.now());
         model.addAttribute("message", "글 작성이 완료되었습니다.");
-        model.addAttribute("searchUrl", "/board/list");
+        model.addAttribute("searchUrl", "/board/post/" + id);
 
         return "message";
-//        return "redirect:/board/list";
+//        return "redirect:/board/post/" + id;
     }
 
     /**
