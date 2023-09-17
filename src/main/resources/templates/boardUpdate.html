@@ -55,22 +55,22 @@
 <body>
 <div class="container">
   <h1>게시글 수정</h1>
-  <form th:action="@{/board/post/update/{id}(id=${post.id})}" method="post" enctype="multipart/form-data">
+  <form th:action="@{/board/post/update/{id}(id=${post.id})}" th:object="${post}" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="title">제목</label>
-      <input type="text" id="title" name="title" th:value="${post.title}" required onkeyup="checkTitleLength()">
+      <input type="text" id="title" th:field="*{title}" required onkeyup="checkTitleLength()">
       <span id="titleLengthMessage"></span>
     </div>
 
     <div class="form-group">
       <label for="author">작성자</label>
-      <input type="text" id="author" name="author" th:value="${post.author}" disabled>
+      <input type="text" id="author" th:field="*{author}" disabled>
     </div>
 
     <div class="form-group">
       <label for="content">내용</label>
-      <textarea id="content" name="content" rows="8" th:text="${post.content}" required></textarea>
+      <textarea id="content" th:field="*{content}" rows="8" required></textarea>
       <!--파일 업로드 부분 추가-->
       <a th:href="@{${post.filepath}}">사진</a>
       <input type="file" name="file">

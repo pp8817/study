@@ -7,9 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.UUID;
-import java.util.List;
 
 @Component
 public class FileStore {
@@ -21,16 +19,20 @@ public class FileStore {
         return fileDir + filename;
     }
 
-    public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
-        List<UploadFile> storeFileResult = new ArrayList<>();
-        for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.isEmpty()) {
-                storeFileResult.add(storeFile(multipartFile)); //파일의 이름 정보가 들어간 UploadFile 객체를 storeFileResult에 넣어줌
-            }
-        }
-        return storeFileResult; //UploadFile 객체가 담긴 storeFileResult 반환
-
-    }
+    /**
+     * @param multipartFile
+     * 추후 여러 장의 사진을 넣을 때 사용될 예정
+     */
+//    public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
+//        List<UploadFile> storeFileResult = new ArrayList<>();
+//        for (MultipartFile multipartFile : multipartFiles) {
+//            if (!multipartFile.isEmpty()) {
+//                storeFileResult.add(storeFile(multipartFile)); //파일의 이름 정보가 들어간 UploadFile 객체를 storeFileResult에 넣어줌
+//            }
+//        }
+//        return storeFileResult; //UploadFile 객체가 담긴 storeFileResult 반환
+//
+//    }
 
     public UploadFile storeFile(MultipartFile multipartFile) throws IOException {
         if (multipartFile.isEmpty()) {

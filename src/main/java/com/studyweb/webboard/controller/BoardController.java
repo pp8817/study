@@ -14,14 +14,10 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
 
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.charset.StandardCharsets;
 
@@ -38,12 +34,13 @@ public class BoardController {
     }
 
     @GetMapping("/board/write")
-    public String boardWriteForm() {
+    public String boardWriteForm(Model model) {
+        model.addAttribute("post", new Board());
         return "boardWrite";
     }
 
     @PostMapping("/board/write")
-    public String boardWrite(Board board, Model model, MultipartFile file) throws Exception {
+    public String boardWrite(@ModelAttribute Board board, Model model, MultipartFile file) throws Exception {
 
         boardService.save(board, file);
 //        model.addAttribute("localDateTime", LocalDateTime.now());
@@ -72,7 +69,6 @@ public class BoardController {
         String imageFilepath = post.getFilepath(); //DB에 저장하는 파일 경로
 
         UrlResource resource = new UrlResource("file:" + fileStore.getFullPath(imageFilepath));
-        System.out.println("resource = " + resource);
 
         String encodedUploadFileName = UriUtils.encode(imageFilename, StandardCharsets.UTF_8); // 한글, 특수문자가 깨지는 것을 방지
         String contentDisposition = "attachment; filename=\"" + encodedUploadFileName + "\"";
@@ -91,7 +87,7 @@ public class BoardController {
         Page<Board> list = null;
 
         if (searchKeyword == null) {
-            list = boardService.boardList(pageable);
+            list = boardService.boardList(pageable); //검색을 안하면 현재 페이지 유지
         } else {
             list = boardService.boardSearchList(searchKeyword, pageable);
         }
@@ -120,7 +116,7 @@ public class BoardController {
         boardService.delete(id);
 
         model.addAttribute("message", "게시글이 삭제되었습니다.");
-        model.addAttribute("searchUrl", "/board/list");
+        model.addAttribute("searchUrl", "/board/list"); //자동 리다이렉트
 
         return "message";
     }
@@ -132,16 +128,16 @@ public class BoardController {
     }
 
     @PostMapping("/board/post/update/{id}")
-    public String postUpdate(@PathVariable Integer id, Board board, Model model, MultipartFile file) throws Exception {
+    public String postUpdate(@PathVariable Integer id, @ModelAttribute Board board,
+                             Model model, MultipartFile file) throws Exception {
+
         boardService.update(id, board, file);
 
         model.addAttribute("message", "게시글 수정이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/post/" + id);
 
         return "message";
-
 //        model.addAttribute("localDateTime", LocalDateTime.now());
-
 //        return "redirect:/board/list";
     }
 }
