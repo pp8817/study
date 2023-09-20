@@ -69,27 +69,27 @@
 <div class="container">
 
     <div class="btn-group">
-        <a class="btn btn-delete" th:href="@{/board/post/delete/{id}(id=${post.id})}">게시글 삭제</a>
-        <a class="btn btn-edit" th:href="@{/board/post/update/{id}(id=${post.id})}">게시글 수정</a>
-        <a class="btn" th:href="@{/board/list}">목록으로 돌아가기</a>
+        <a class="btn btn-delete" th:text="#{button.delete}" th:href="@{/board/post/delete/{id}(id=${post.id})}">게시글 삭제</a>
+        <a class="btn btn-edit" th:text="#{button.modified}" th:href="@{/board/post/update/{id}(id=${post.id})}">게시글 수정</a>
+        <a class="btn" th:text="#{button.list}" th:href="@{/board/list}">목록으로 돌아가기</a>
     </div>
 
     <div class="post">
         <h2 class="title" th:text="${post.title}">게시글 제목</h2>
 
-        <p th:text="'작성자: ' + ${post.author}" >작성자: 작성자 이름</p>
+        <p th:text="#{label.author}+': ' + ${post.author}" >작성자: 작성자 이름</p>
 
         <div class="time"> <!-- 변경된 부분 -->
             <span th:if="${post.getCreatedDate() == post.getModifiedDate()}"
-                  th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+                  th:text="#{label.createdDate}+': '  + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
             <span th:if="${post.getCreatedDate() != post.getModifiedDate()}"
-                  th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+                  th:text="#{label.createdDate}+': ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
             <br>
             <span th:if="${post.getCreatedDate() != post.getModifiedDate()}"
-                  th:text="'수정 시간: ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+                  th:text="#{label.modifiedDate}+': ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
         </div>
 
-        <p th:text="'내용: ' + ${post.content}">내용: 게시글 내용...</p>
+        <p th:text="#{label.content} +': ' + ${post.content}">내용: 게시글 내용...</p>
 <!--        <a th:href="@{${post.filepath}}">첨부파일 기능 구현중..</a>-->
         <span th:if="${post.filepath != null}">
             <img th:src="@{'/images/' + ${post.filepath}}" width="300" height="300"/><br>

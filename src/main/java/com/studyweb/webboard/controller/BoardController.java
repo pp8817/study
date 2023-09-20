@@ -1,6 +1,6 @@
 package com.studyweb.webboard.controller;
 
-import com.studyweb.webboard.domain.Board;
+import com.studyweb.webboard.service.domain.Board;
 import com.studyweb.webboard.file.FileStore;
 import com.studyweb.webboard.service.BoardService;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.studyweb.webboard.file;
 
-import com.studyweb.webboard.domain.UploadFile;
+import com.studyweb.webboard.service.domain.UploadFile;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

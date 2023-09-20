@@ -54,29 +54,29 @@
 </head>
 <body>
 <div class="container">
-  <h1>게시글 수정</h1>
+  <h1 th:text="#{page.modified}">게시글 수정</h1>
   <form th:action="@{/board/post/update/{id}(id=${post.id})}" th:object="${post}" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
-      <label for="title">제목</label>
+      <label for="title" th:text="#{label.title}">제목</label>
       <input type="text" id="title" th:field="*{title}" required onkeyup="checkTitleLength()">
       <span id="titleLengthMessage"></span>
     </div>
 
     <div class="form-group">
-      <label for="author">작성자</label>
+      <label for="author" th:text="#{label.author}">작성자</label>
       <input type="text" id="author" th:field="*{author}" disabled>
     </div>
 
     <div class="form-group">
-      <label for="content">내용</label>
+      <label for="content" th:text="#{label.content}">내용</label>
       <textarea id="content" th:field="*{content}" rows="8" required></textarea>
       <!--파일 업로드 부분 추가-->
-      <input type="file" name="file">
+      <strong>이미지 파일<input type="file" name="file"></strong>
       <!--                -->
     </div>
 
-    <button type="submit" class="btn" id="submitButton">수정하기</button>
+    <button type="submit" class="btn" id="submitButton" th:text="#{button.modified}">수정하기</button>
   </form>
 </div>
 

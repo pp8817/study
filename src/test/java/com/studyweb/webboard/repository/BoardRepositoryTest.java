@@ -1,6 +1,6 @@
 package com.studyweb.webboard.repository;
 
-import com.studyweb.webboard.domain.Board;
+import com.studyweb.webboard.service.domain.Board;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,11 +25,12 @@ class BoardRepositoryTest {
         //given
         LocalDateTime now = LocalDateTime.of(2023, 9, 10, 0, 0, 0);
         System.out.println("now = " + now);
-        Board save = boardRepository.save(Board.builder()
-                .title("title")
-                .content("content")
-                .author("author")
-                .build());
+        Board save = new Board();
+        save.setTitle("title");
+        save.setContent("content");
+        save.setAuthor("author");
+
+        boardRepository.save(save);
 
         System.out.println("save = " + save);
 

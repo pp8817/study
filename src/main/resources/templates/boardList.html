@@ -118,15 +118,15 @@
 </head>
 <body>
 <div class="container">
-    <a class="btn btn-write" th:href="@{/board/write}">게시글 작성</a>
-    <h1>게시글 목록</h1>
+    <a class="btn btn-write" th:text="#{button.write}" th:href="@{/board/write}">게시글 작성</a>
+    <h1 th:text="#{page.list}">게시글 목록</h1>
     <div class="posts">
         <div th:each="post : ${list}" class="post">
             <h2>
                 <a th:href="@{/board/post/{id}(id=${post.id})}" th:text="${post.title}">게시글 제목</a>
             </h2>
-            <p th:text="'작성자: ' + ${post.author}">작성자: 작성자 이름</p>
-            <span th:text="'작성 시간: ' + ${#temporals.format(post.getCreatedDate(), 'YY-MM-dd')}"></span>
+            <p th:text="#{label.author}+': ' + ${post.author}">작성자: 작성자 이름</p>
+            <span th:text="#{label.createdDate}+': ' + ${#temporals.format(post.getCreatedDate(), 'YY-MM-dd')}"></span>
         </div>
     </div>
 
@@ -139,9 +139,9 @@
 
     <form th:action="@{/board/list}" method="get">
         <div class="search-container">
-            <label class="search-label" for="searchKeyword">검색어:</label>
+            <label class="search-label" for="searchKeyword" th:text="#{label.search}">검색어:</label>
             <input class="search-input" type="text" id="searchKeyword" name="searchKeyword" />
-            <button class="search-button" type="submit">검색</button>
+            <button class="search-button" type="submit" th:text="#{button.search}">검색</button>
         </div>
     </form>
 

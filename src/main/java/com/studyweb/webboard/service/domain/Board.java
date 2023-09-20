@@ -1,8 +1,7 @@
-package com.studyweb.webboard.domain;
+package com.studyweb.webboard.service.domain;
 
-import com.studyweb.webboard.domain.time.TimeEntity;
+import com.studyweb.webboard.service.domain.time.TimeEntity;
 import lombok.Data;
-import java.util.List;
 
 import javax.persistence.*;
 
