@@ -14,6 +14,9 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
@@ -40,11 +43,11 @@ public class BoardController {
     }
 
     @PostMapping("/board/write")
-    public String boardWrite(@ModelAttribute Board board, Model model, MultipartFile file) throws Exception {
+    public String boardWrite(@ModelAttribute Board board, BindingResult bindingResult, Model model, MultipartFile file) throws Exception {
         boardService.save(board, file);
         Integer id = board.getId();
 
-//        model.addAttribute("localDateTime", LocalDateTime.now());
+        //성공 로직
         model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/post/" + id);
 

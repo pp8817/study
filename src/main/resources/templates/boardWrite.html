@@ -59,19 +59,19 @@
 
         <div class="form-group">
             <label for="title" th:text="#{label.title}">제목</label>
-            <input type="text" id="title" th:field="*{title}" required onkeyup="checkInputLength()">
+            <input type="text" id="title" th:field="*{title}" required onkeyup="checkInputLength()" placeholder="제목을 입력하세요.">
             <span id="titleLengthMessage"></span>
         </div>
 
         <div class="form-group">
             <label for="author" th:text="#{label.author}">작성자</label>
-            <input type="text" id="author" th:field="*{author}" required onkeyup="checkInputLength()">
+            <input type="text" id="author" th:field="*{author}" required onkeyup="checkInputLength()" placeholder="작성자 이름을 입력하세요.">
             <span id="authorLengthMessage"></span>
         </div>
 
         <div class="form-group">
             <label for="content" th:text="#{label.content}">내용</label>
-            <textarea id="content" th:field="*{content}" rows="8" required></textarea>
+            <textarea id="content" th:field="*{content}" rows="8"></textarea>
             <strong>이미지 파일<input type="file" name="file"></strong>
             <li>첨부파일 기능 구현 중..<input type="file" name="attachFile"></li>
         </div>
