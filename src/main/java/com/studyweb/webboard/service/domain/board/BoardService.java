@@ -65,9 +65,9 @@ public class BoardService {
         boardRepository.save(board);
     }
 
-    private static String getProjectPath() {
-        return System.getProperty("user.dir") + "/src/main/resources/static/files";
-    }
+//    private static String getProjectPath() {
+//        return System.getProperty("user.dir") + "/src/main/resources/static/files";
+//    }
 
 
 }

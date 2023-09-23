@@ -16,14 +16,14 @@ public class Board extends TimeEntity {
     private Integer id;
 
     @NotBlank(message = "공백x", groups = {SaveCheck.class, UpdateCheck.class})
-    @Size(min=2, max=40, groups = {SaveCheck.class, UpdateCheck.class})
+//    @Size(min=2, max=40, groups = {SaveCheck.class, UpdateCheck.class})
     private String title;
 
 
     private String content;
 
     @NotBlank(groups = {SaveCheck.class})
-    @Size(max=10, groups = {SaveCheck.class})
+//    @Size(max=10, groups = {SaveCheck.class})
     private String author;
 
 //    private String attachName;

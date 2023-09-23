@@ -61,6 +61,12 @@
             text-align: center;
         }
 
+        .author {
+            border-bottom: 2px solid #ccc; /* 구분선 스타일 추가 */
+            padding-bottom: 10px; /* 구분선과 내용 간격 조정 */
+            margin-bottom: 20px; /* 제목 아래 여백 추가 */
+        }
+
     </style>
 </head>
 <body>
@@ -77,7 +83,7 @@
     <div class="post">
         <h2 class="title" th:text="${post.title}">게시글 제목</h2>
 
-        <p th:text="#{label.author}+': ' + ${post.author}" >작성자: 작성자 이름</p>
+        <p class="author" th:text="#{label.author}+': ' + ${post.author}" >작성자: 작성자 이름</p>
 
         <div class="time"> <!-- 변경된 부분 -->
             <span th:if="${post.getCreatedDate() == post.getModifiedDate()}"
@@ -89,7 +95,7 @@
                   th:text="#{label.modifiedDate}+': ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
         </div>
 
-        <p th:text="#{label.content} +': ' + ${post.content}">내용: 게시글 내용...</p>
+        <p class="content" th:text="#{label.content} +': ' + ${post.content}">내용: 게시글 내용...</p>
 <!--        <a th:href="@{${post.filepath}}">첨부파일 기능 구현중..</a>-->
         <span th:if="${post.filepath != null}">
             <img th:src="@{'/images/' + ${post.filepath}}" width="300" height="300"/><br>

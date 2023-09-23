@@ -50,6 +50,18 @@
       text-decoration: none;
       margin-top: 20px; /* 변경된 간격 */
     }
+    .btn_c {
+      padding: 12px 24px;
+      background-color: #ccc;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      position: absolute; /* 위치를 절대 위치로 지정 */
+      top: 20px; /* 위에서 20px 아래로 */
+      left: 20px; /* 왼쪽에서 20px 오른쪽으로 */
+    }
     .field-error{
       color: crimson;
     }
@@ -58,16 +70,17 @@
 <body>
 <div class="container">
   <h1 th:text="#{page.modified}">게시글 수정</h1>
+  <button class="btn_c" th:onclick="|location.href='@{/board/post/{id}(id=${board.id})}'|" th:text="#{button.cancel}">취소하기</button>
   <form th:action="@{/board/post/update/{id}(id=${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="title" th:text="#{label.title}">제목</label>
-<!--      <input type="text" id="title" th:field="*{title}" required onkeyup="checkTitleLength()">-->
-      <input type="text" id="title" th:field="*{title}" th:errorclass="field-error">
+      <input type="text" id="title" th:field="*{title}" th:errorclass="field-error" onkeyup="checkTitleLength()">
+<!--      <input type="text" id="title" th:field="*{title}" th:errorclass="field-error">-->
       <div class="field-error" th:errors="*{title}">
         게시글 제목 오류
       </div>
-<!--      <span id="titleLengthMessage"></span>-->
+      <span id="titleLengthMessage"></span>
     </div>
 
     <div class="form-group">
@@ -77,7 +90,7 @@
 
     <div class="form-group">
       <label for="content" th:text="#{label.content}">내용</label>
-      <textarea id="content" th:field="*{content}" rows="8" required></textarea>
+      <textarea id="content" th:field="*{content}" rows="8"></textarea>
       <!--파일 업로드 부분 추가-->
       <strong>이미지 파일<input type="file" name="file"></strong>
       <!--                -->
@@ -87,23 +100,23 @@
   </form>
 </div>
 
-<!--<script>-->
-<!--  function checkTitleLength() {-->
-<!--    var titleInput = document.getElementById("title");-->
-<!--    var submitButton = document.getElementById("submitButton");-->
-<!--    var titleLengthMessage = document.getElementById("titleLengthMessage");-->
+<script>
+  function checkTitleLength() {
+    var titleInput = document.getElementById("title");
+    var submitButton = document.getElementById("submitButton");
+    var titleLengthMessage = document.getElementById("titleLengthMessage");
 
-<!--    if (titleInput.value.length > 40) {-->
-<!--      titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";-->
-<!--      submitButton.disabled = true;-->
-<!--      submitButton.style.backgroundColor = "#ccc"; // 배경색을 회색(#ccc)으로 변경-->
-<!--    } else {-->
-<!--      titleLengthMessage.innerText = "";-->
-<!--      submitButton.disabled = false;-->
-<!--      submitButton.style.backgroundColor = "#007bff"; // 기본 배경색으로 변경-->
-<!--    }-->
-<!--  }-->
-<!--</script>-->
+    if (titleInput.value.length > 40) {
+      titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";
+      submitButton.disabled = true;
+      submitButton.style.backgroundColor = "#ccc"; // 배경색을 회색(#ccc)으로 변경
+    } else {
+      titleLengthMessage.innerText = "";
+      submitButton.disabled = false;
+      submitButton.style.backgroundColor = "#007bff"; // 기본 배경색으로 변경
+    }
+  }
+</script>
 
 </body>
 </html>
