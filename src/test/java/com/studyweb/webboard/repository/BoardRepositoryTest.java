@@ -1,6 +1,7 @@
 package com.studyweb.webboard.repository;
 
-import com.studyweb.webboard.service.domain.Board;
+import com.studyweb.webboard.service.domain.board.Board;
+import com.studyweb.webboard.service.domain.board.BoardRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,9 +1,12 @@
 package com.studyweb.webboard.controller;
 
-import com.studyweb.webboard.service.domain.Board;
-import com.studyweb.webboard.file.FileStore;
-import com.studyweb.webboard.service.BoardService;
+import com.studyweb.webboard.service.domain.board.Board;
+import com.studyweb.webboard.service.domain.board.SaveCheck;
+import com.studyweb.webboard.service.domain.board.UpdateCheck;
+import com.studyweb.webboard.service.file.FileStore;
+import com.studyweb.webboard.service.domain.board.BoardService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -14,9 +17,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.util.UriUtils;
@@ -26,6 +28,7 @@ import java.nio.charset.StandardCharsets;
 
 @Controller
 @RequiredArgsConstructor
+@Slf4j
 public class BoardController {
 
     private final BoardService boardService;
@@ -38,16 +41,26 @@ public class BoardController {
 
     @GetMapping("/board/write")
     public String boardWriteForm(Model model) {
-        model.addAttribute("post", new Board());
+        model.addAttribute("board", new Board());
         return "boardWrite";
     }
 
     @PostMapping("/board/write")
-    public String boardWrite(@ModelAttribute Board board, BindingResult bindingResult, Model model, MultipartFile file) throws Exception {
+    public String boardWrite(@Validated(SaveCheck.class) @ModelAttribute Board board, BindingResult bindingResult, Model model, MultipartFile file) throws Exception {
+
+//        if (!StringUtils.hasText(board.getTitle())) {
+//            bindingResult.addError(new FieldError("board", "title", "제목은 필수입니다."));
+//        }
+
+        if (bindingResult.hasErrors()) {
+            log.info("errors={}", bindingResult);
+            return "boardWrite";
+        }
+
+        //성공 로직
         boardService.save(board, file);
         Integer id = board.getId();
 
-        //성공 로직
         model.addAttribute("message", "글 작성이 완료되었습니다.");
         model.addAttribute("searchUrl", "/board/post/" + id);
 
@@ -127,13 +140,18 @@ public class BoardController {
 
     @GetMapping("/board/post/update/{id}")
     public String postUpdateForm(@PathVariable Integer id, Model model) {
-        model.addAttribute("post", boardService.findById(id));
+        model.addAttribute("board", boardService.findById(id));
         return "boardUpdate";
     }
 
     @PostMapping("/board/post/update/{id}")
-    public String postUpdate(@PathVariable Integer id, @ModelAttribute Board board,
+    public String postUpdate(@PathVariable Integer id, @Validated(UpdateCheck.class) @ModelAttribute Board board, BindingResult bindingResult,
                              Model model, MultipartFile file) throws Exception {
+        System.out.println("board = " + board.getAuthor());
+
+        if (bindingResult.hasErrors()) {
+            return "boardUpdate";
+        }
 
         boardService.update(id, board, file);
 

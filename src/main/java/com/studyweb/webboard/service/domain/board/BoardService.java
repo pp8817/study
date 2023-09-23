@@ -1,9 +1,9 @@
-package com.studyweb.webboard.service;
+package com.studyweb.webboard.service.domain.board;
 
-import com.studyweb.webboard.service.domain.Board;
+import com.studyweb.webboard.service.domain.board.Board;
 import com.studyweb.webboard.service.domain.UploadFile;
-import com.studyweb.webboard.file.FileStore;
-import com.studyweb.webboard.repository.BoardRepository;
+import com.studyweb.webboard.service.file.FileStore;
+import com.studyweb.webboard.service.domain.board.BoardRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;

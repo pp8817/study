@@ -1,6 +1,6 @@
-package com.studyweb.webboard.repository;
+package com.studyweb.webboard.service.domain.board;
 
-import com.studyweb.webboard.service.domain.Board;
+import com.studyweb.webboard.service.domain.board.Board;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;

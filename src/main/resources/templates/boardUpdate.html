@@ -50,17 +50,24 @@
       text-decoration: none;
       margin-top: 20px; /* 변경된 간격 */
     }
+    .field-error{
+      color: crimson;
+    }
   </style>
 </head>
 <body>
 <div class="container">
   <h1 th:text="#{page.modified}">게시글 수정</h1>
-  <form th:action="@{/board/post/update/{id}(id=${post.id})}" th:object="${post}" method="post" enctype="multipart/form-data">
+  <form th:action="@{/board/post/update/{id}(id=${board.id})}" th:object="${board}" method="post" enctype="multipart/form-data">
 
     <div class="form-group">
       <label for="title" th:text="#{label.title}">제목</label>
-      <input type="text" id="title" th:field="*{title}" required onkeyup="checkTitleLength()">
-      <span id="titleLengthMessage"></span>
+<!--      <input type="text" id="title" th:field="*{title}" required onkeyup="checkTitleLength()">-->
+      <input type="text" id="title" th:field="*{title}" th:errorclass="field-error">
+      <div class="field-error" th:errors="*{title}">
+        게시글 제목 오류
+      </div>
+<!--      <span id="titleLengthMessage"></span>-->
     </div>
 
     <div class="form-group">
@@ -80,23 +87,23 @@
   </form>
 </div>
 
-<script>
-  function checkTitleLength() {
-    var titleInput = document.getElementById("title");
-    var submitButton = document.getElementById("submitButton");
-    var titleLengthMessage = document.getElementById("titleLengthMessage");
+<!--<script>-->
+<!--  function checkTitleLength() {-->
+<!--    var titleInput = document.getElementById("title");-->
+<!--    var submitButton = document.getElementById("submitButton");-->
+<!--    var titleLengthMessage = document.getElementById("titleLengthMessage");-->
 
-    if (titleInput.value.length > 40) {
-      titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";
-      submitButton.disabled = true;
-      submitButton.style.backgroundColor = "#ccc"; // 배경색을 회색(#ccc)으로 변경
-    } else {
-      titleLengthMessage.innerText = "";
-      submitButton.disabled = false;
-      submitButton.style.backgroundColor = "#007bff"; // 기본 배경색으로 변경
-    }
-  }
-</script>
+<!--    if (titleInput.value.length > 40) {-->
+<!--      titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";-->
+<!--      submitButton.disabled = true;-->
+<!--      submitButton.style.backgroundColor = "#ccc"; // 배경색을 회색(#ccc)으로 변경-->
+<!--    } else {-->
+<!--      titleLengthMessage.innerText = "";-->
+<!--      submitButton.disabled = false;-->
+<!--      submitButton.style.backgroundColor = "#007bff"; // 기본 배경색으로 변경-->
+<!--    }-->
+<!--  }-->
+<!--</script>-->
 
 </body>
 </html>

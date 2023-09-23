@@ -50,23 +50,35 @@
             text-decoration: none;
             margin-top: 20px; /* 변경된 간격 */
         }
+
+        .field-error{
+            color: crimson;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h1 th:text="#{page.write}">게시글 작성</h1>
-    <form th:action="@{/board/write}" th:object="${post}" method="post" enctype="multipart/form-data">
+    <form th:action="@{/board/write}" th:object="${board}" method="post" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="title" th:text="#{label.title}">제목</label>
-            <input type="text" id="title" th:field="*{title}" required onkeyup="checkInputLength()" placeholder="제목을 입력하세요.">
-            <span id="titleLengthMessage"></span>
+<!--            <input type="text" id="title" th:field="*{title}" required onkeyup="checkInputLength()" placeholder="제목을 입력하세요.">-->
+            <input type="text" id="title" th:field="*{title}" th:errorclass="field-error"  placeholder="제목을 입력하세요.">
+            <div class="field-error" th:errors="*{title}">
+                게시글 제목 오류
+            </div>
+<!--            <span id="titleLengthMessage"></span>-->
         </div>
 
         <div class="form-group">
             <label for="author" th:text="#{label.author}">작성자</label>
-            <input type="text" id="author" th:field="*{author}" required onkeyup="checkInputLength()" placeholder="작성자 이름을 입력하세요.">
-            <span id="authorLengthMessage"></span>
+<!--            <input type="text" id="author" th:field="*{author}" required onkeyup="checkInputLength()" placeholder="작성자 이름을 입력하세요.">-->
+            <input type="text" id="author" th:field="*{author}" th:errorclass="field-error" placeholder="작성자 이름을 입력하세요.">
+            <div class="field-error" th:errors="*{author}">
+                작성자 오류
+            </div>
+<!--            <span id="authorLengthMessage"></span>-->
         </div>
 
         <div class="form-group">
@@ -79,35 +91,35 @@
         <button type="submit" class="btn" id="submitButton" th:text="#{button.write}">작성하기</button>
     </form>
 
-    <script>
-        function checkInputLength() {
-            var titleInput = document.getElementById("title");
-            var authorInput = document.getElementById("author");
-            var submitButton = document.getElementById("submitButton");
-            var titleLengthMessage = document.getElementById("titleLengthMessage");
-            var authorLengthMessage = document.getElementById("authorLengthMessage");
+<!--    <script>-->
+<!--        function checkInputLength() {-->
+<!--            var titleInput = document.getElementById("title");-->
+<!--            var authorInput = document.getElementById("author");-->
+<!--            var submitButton = document.getElementById("submitButton");-->
+<!--            var titleLengthMessage = document.getElementById("titleLengthMessage");-->
+<!--            var authorLengthMessage = document.getElementById("authorLengthMessage");-->
 
-            if (titleInput.value.length > 40 || authorInput.value.length > 10) {
-                submitButton.disabled = true;
-                submitButton.style.backgroundColor = "#ccc";
-            } else {
-                submitButton.disabled = false;
-                submitButton.style.backgroundColor = "#007bff";
-            }
+<!--            if (titleInput.value.length > 40 || authorInput.value.length > 10) {-->
+<!--                submitButton.disabled = true;-->
+<!--                submitButton.style.backgroundColor = "#ccc";-->
+<!--            } else {-->
+<!--                submitButton.disabled = false;-->
+<!--                submitButton.style.backgroundColor = "#007bff";-->
+<!--            }-->
 
-            if (titleInput.value.length > 40) {
-                titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";
-            } else {
-                titleLengthMessage.innerText = "";
-            }
+<!--            if (titleInput.value.length > 40) {-->
+<!--                titleLengthMessage.innerText = "제목은 40자 이하만 가능합니다.";-->
+<!--            } else {-->
+<!--                titleLengthMessage.innerText = "";-->
+<!--            }-->
 
-            if (authorInput.value.length > 10) {
-                authorLengthMessage.innerText = "작성자는 10자 이하만 가능합니다.";
-            } else {
-                authorLengthMessage.innerText = "";
-            }
-        }
-    </script>
+<!--            if (authorInput.value.length > 10) {-->
+<!--                authorLengthMessage.innerText = "작성자는 10자 이하만 가능합니다.";-->
+<!--            } else {-->
+<!--                authorLengthMessage.innerText = "";-->
+<!--            }-->
+<!--        }-->
+<!--    </script>-->
 
 </div>
 

@@ -1,4 +1,4 @@
-package com.studyweb.webboard.file;
+package com.studyweb.webboard.service.file;
 
 import com.studyweb.webboard.service.domain.UploadFile;
 import org.springframework.beans.factory.annotation.Value;
