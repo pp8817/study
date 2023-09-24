@@ -27,13 +27,16 @@ public class JpaMain {
 //                System.out.println("member = " + member);
 //            }
             //비영속
-            Member member = new Member();
-            member.setId(100L);
-            member.setName("HelloJPA");
+//            Member member = new Member();
+//            member.setId(101L);
+//            member.setName("HelloJPA");
 
             //영속
-            em.persist(member); //이때 db에 저장되는 것은 아님.
-//            em.detach(member); 영속성 컨텍스트에서 지워버리는 것
+//            em.persist(member); //이때 db에 저장되는 것은 아님.
+            Member findMember1 = em.find(Member.class, 101L);//조회를 할 때 셀렉트 쿼리가 안나감. 이유? 1차 캐시에 저장이 됐기 때문에 pk 값으로 가져옴
+            Member findMember2 = em.find(Member.class, 101L); //이때는 쿼리가 안나감
+
+//            em.detach(member); 영속성 컨텍스트에서 지워버리는 
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
             tx.rollback();
