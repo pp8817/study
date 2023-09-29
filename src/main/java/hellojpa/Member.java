@@ -9,29 +9,11 @@ import java.util.Date;
 //@Table(name = "MBR") //쿼리가 나갈 때 해당 테이블에 인서트하고 나감
 public class Member {
     @Id //pk가 무엇인지 알려줌, pk 매핑
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(name = "name") // 컬럼 이름, 안적어주면 필드 명으로 지정
+    @Column(name = "name", nullable = false) // 컬럼 이름, 안적어주면 필드 명으로 지정
     private String username;
-    private Integer age;
 
-    @Enumerated(EnumType.STRING) //DB에는 enum 타입이 없음. 사용하기 위한 어노태이션
-    private RoleType roleType;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date createdDate;
-
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date lastModifiedDate;
-
-    private LocalDate testLocalDate; //년 월만
-    private LocalDateTime testLocalDateTime;//년 월 일
-
-    @Lob
-    private String description;
-
-    /**
-     * Getter, Setter
-     */
     public Member() {
     }
 
@@ -50,45 +32,84 @@ public class Member {
     public void setUsername(String username) {
         this.username = username;
     }
-
-    public Integer getAge() {
-        return age;
-    }
-
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public RoleType getRoleType() {
-        return roleType;
-    }
-
-    public void setRoleType(RoleType roleType) {
-        this.roleType = roleType;
-    }
-
-    public Date getCreatedDate() {
-        return createdDate;
-    }
-
-    public void setCreatedDate(Date createdDate) {
-        this.createdDate = createdDate;
-    }
-
-    public Date getLastModifiedDate() {
-        return lastModifiedDate;
-    }
-
-    public void setLastModifiedDate(Date lastModifiedDate) {
-        this.lastModifiedDate = lastModifiedDate;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 }
+
+//
+//    private Integer age;
+//
+//    @Enumerated(EnumType.STRING) //DB에는 enum 타입이 없음. 사용하기 위한 어노태이션
+//    private RoleType roleType;
+//
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date createdDate;
+//
+//    @Temporal(TemporalType.TIMESTAMP)
+//    private Date lastModifiedDate;
+//
+//    private LocalDate testLocalDate; //년 월만
+//    private LocalDateTime testLocalDateTime;//년 월 일
+//
+//    @Lob
+//    private String description;
+//
+//    /**
+//     * Getter, Setter
+//     */
+//
+//    public Long getId() {
+//        return id;
+//    }
+//
+//    public void setId(Long id) {
+//        this.id = id;
+//    }
+//
+//    public String getUsername() {
+//        return username;
+//    }
+//
+//    public void setUsername(String username) {
+//        this.username = username;
+//    }
+//
+//    public Integer getAge() {
+//        return age;
+//    }
+//
+//    public void setAge(Integer age) {
+//        this.age = age;
+//    }
+//
+//    public RoleType getRoleType() {
+//        return roleType;
+//    }
+//
+//    public void setRoleType(RoleType roleType) {
+//        this.roleType = roleType;
+//    }
+//
+//    public Date getCreatedDate() {
+//        return createdDate;
+//    }
+//
+//    public void setCreatedDate(Date createdDate) {
+//        this.createdDate = createdDate;
+//    }
+//
+//    public Date getLastModifiedDate() {
+//        return lastModifiedDate;
+//    }
+//
+//    public void setLastModifiedDate(Date lastModifiedDate) {
+//        this.lastModifiedDate = lastModifiedDate;
+//    }
+//
+//    public String getDescription() {
+//        return description;
+//    }
+//
+//    public void setDescription(String description) {
+//        this.description = description;
+//    }
+//}
 
