@@ -1,6 +1,7 @@
 package jpabook.jpashop;
 
 import jpabook.jpashop.domain.Order;
+import jpabook.jpashop.domain.OrderItem;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -20,6 +21,9 @@ public class JpaMain {
 
 
         try {
+            Order order = new Order();
+            order.addOrderItem(new OrderItem());
+
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
             tx.rollback();

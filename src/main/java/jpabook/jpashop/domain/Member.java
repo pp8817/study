@@ -1,5 +1,7 @@
 package jpabook.jpashop.domain;
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Member {
@@ -8,15 +10,13 @@ public class Member {
     @GeneratedValue
     @Column(name = "MEMBER_ID")
     private Long Id;
-
     private String name;
-
     private String city;
-
     private String street;
-
     private String zipcode;
 
+    @OneToMany(mappedBy = "member") //양방향 매핑, 연관관계 주인 설
+    private List<Order> orders = new ArrayList<>(); // 초기 값을 new ArrayList<>();로 주는 것은 보통 관계로 많이 사용
 
 
 
