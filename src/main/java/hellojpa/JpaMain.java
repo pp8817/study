@@ -18,11 +18,27 @@ public class JpaMain {
 
 
         try {
+            Team team = new Team();
+            team.setName("TeamA");
+//            team.getMembers().add(member);
+            em.persist(team);
 
             Member member = new Member();
-            member.setUsername("C");
-
+            member.setUsername("member1");
             em.persist(member);
+
+            team.addMember(member); //연관관계 편의 메서드
+
+            em.flush();
+            em.clear();
+
+            Team findTeam = em.find(Team.class, team.getId());
+            List<Member> members = findTeam.getMembers();
+
+
+            System.out.println("===================");
+            System.out.println("members = " + findTeam);
+            System.out.println("===================");
 
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {

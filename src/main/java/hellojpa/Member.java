@@ -9,10 +9,18 @@ import java.util.Date;
 //@Table(name = "MBR") //쿼리가 나갈 때 해당 테이블에 인서트하고 나감
 public class Member {
     @Id //pk가 무엇인지 알려줌, pk 매핑
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
+    @Column(name = "MEMBER_ID")
     private Long id;
-    @Column(name = "name", nullable = false) // 컬럼 이름, 안적어주면 필드 명으로 지정
+    @Column(name = "USERNAME")
     private String username;
+
+//    @Column(name = "TEAM_ID")
+//    private Long teamId;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")//Fk, 외래키, 연관관계의 주인
+    private Team team;
 
     public Member() {
     }
@@ -31,6 +39,14 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
 
