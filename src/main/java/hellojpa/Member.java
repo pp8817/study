@@ -1,13 +1,10 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 @Entity //jpa가 로딩될 때 인식을 함, JPA가 관리하는 객체가 되고 데이터베이스 테이블과 맵핑을 해서 사용함
 //@Table(name = "MBR") //쿼리가 나갈 때 해당 테이블에 인서트하고 나감
-public class Member {
+public class Member extends BaseEntity{
     @Id //pk가 무엇인지 알려줌, pk 매핑
     @GeneratedValue
     @Column(name = "MEMBER_ID")
@@ -21,6 +18,7 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")//Fk, 외래키
     private Team team; //연관관계의 주인
+
 
     public Member() {
     }

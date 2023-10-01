@@ -6,6 +6,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.time.LocalDateTime;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -19,19 +20,16 @@ public class JpaMain {
 
 
         try {
-            Movie movie = new Movie();
-            movie.setDirector("B");
-            movie.setActor("C");
+            Member member = new Member();
+            member.setCreateBy("kim");
+            member.setCreatedDate(LocalDateTime.now());
+            member.setUsername("user");
 
-            movie.setName("공기");
-            movie.setPrice(100);
-
-            em.persist(movie);
+            em.persist(member);
 
             em.flush();
             em.clear();
 
-            Movie findMovie = em.find(Movie.class, movie.getId());
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
             tx.rollback();
