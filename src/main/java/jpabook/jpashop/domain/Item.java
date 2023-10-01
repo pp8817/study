@@ -1,11 +1,14 @@
 package jpabook.jpashop.domain;
 
 import javax.persistence.*;
+import java.lang.annotation.Inherited;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity{
 
     @Id @GeneratedValue
 //    @Column(name = "ITEM_ID") 기본값
