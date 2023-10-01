@@ -19,8 +19,8 @@ public class Member {
 //    private Long teamId;
 
     @ManyToOne
-    @JoinColumn(name = "TEAM_ID")//Fk, 외래키, 연관관계의 주인
-    private Team team;
+    @JoinColumn(name = "TEAM_ID")//Fk, 외래키
+    private Team team; //연관관계의 주인
 
     public Member() {
     }

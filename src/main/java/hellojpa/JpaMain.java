@@ -1,10 +1,11 @@
 package hellojpa;
 
+import hellojpa.mapp.Movie;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-import java.util.List;
 
 public class JpaMain {
     public static void main(String[] args) {
@@ -18,28 +19,19 @@ public class JpaMain {
 
 
         try {
-            Team team = new Team();
-            team.setName("TeamA");
-//            team.getMembers().add(member);
-            em.persist(team);
+            Movie movie = new Movie();
+            movie.setDirector("B");
+            movie.setActor("C");
 
-            Member member = new Member();
-            member.setUsername("member1");
-            em.persist(member);
+            movie.setName("공기");
+            movie.setPrice(100);
 
-            team.addMember(member); //연관관계 편의 메서드
+            em.persist(movie);
 
             em.flush();
             em.clear();
 
-            Team findTeam = em.find(Team.class, team.getId());
-            List<Member> members = findTeam.getMembers();
-
-
-            System.out.println("===================");
-            System.out.println("members = " + findTeam);
-            System.out.println("===================");
-
+            Movie findMovie = em.find(Movie.class, movie.getId());
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
             tx.rollback();
