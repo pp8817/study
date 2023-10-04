@@ -21,15 +21,21 @@ public class JpaMain {
 
         try {
             Member member = new Member();
-            member.setCreateBy("kim");
-            member.setCreatedDate(LocalDateTime.now());
-            member.setUsername("user");
+            member.setUsername("hello");
 
             em.persist(member);
 
-            em.flush();
-            em.clear();
+            em.flush(); //영속성 컨텍스트의 1차 캐시에 있는 정보를 db로 강제 전송
+            em.clear(); //영속성 컨텍스트 초기화
 
+            //
+//            Member findMember = em.find(Member.class, member.getId());
+//            System.out.println("findMember.getId() = " + findMember.getId());
+//            System.out.println("findMember.getUsername() = " + findMember.getUsername());
+
+            Member findMember = em.getReference(Member.class, member.getId()); //셀렉트 쿼리가 안나감
+             System.out.println("findMember.getId() = " + findMember.getId());
+             System.out.println("findMember.getUsername() = " + findMember.getUsername());
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
             tx.rollback();
