@@ -34,8 +34,8 @@ public class JpaMain {
 //            System.out.println("findMember.getUsername() = " + findMember.getUsername());
 
             Member findMember = em.getReference(Member.class, member.getId()); //셀렉트 쿼리가 안나감
-             System.out.println("findMember.getId() = " + findMember.getId());
-             System.out.println("findMember.getUsername() = " + findMember.getUsername());
+            System.out.println("findMember.getId() = " + findMember.getId());
+            System.out.println("findMember.getUsername() = " + findMember.getUsername());
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
             tx.rollback();
