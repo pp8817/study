@@ -15,7 +15,7 @@ public class Member extends BaseEntity{
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER) //proxy 객체로 조회(Member 클래스만 db에서 조회
     @JoinColumn(name = "TEAM_ID")//Fk, 외래키
     private Team team; //연관관계의 주인
 
