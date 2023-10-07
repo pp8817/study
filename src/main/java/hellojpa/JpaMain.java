@@ -20,21 +20,15 @@ public class JpaMain {
 
 
         try {
-            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
-            
-            Member member = new Member();
-            member.setUsername("hello");
-            member.setTeam(team);
-            em.persist(member);
 
-            em.flush(); //영속성 컨텍스트의 1차 캐시에 있는 정보를 db로 강제 전송
-            em.clear(); //영속성 컨텍스트 초기화
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Member m = em.find(Member.class, member.getId());
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
 
-            System.out.println("m.getTeam().getClass() = " + m.getTeam().getClass());
+            em.persist(parent);
 
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
