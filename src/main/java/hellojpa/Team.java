@@ -16,8 +16,8 @@ public class Team extends BaseEntity{
     private List<Member> members = new ArrayList<>();
 
     public void addMember(Member member) { //연관관계 편의 메서드
-        member.setTeam(this);  //양쪽에 모두 값을 입력 - 순수한 객체 관계를 고려
-        members.add(member);
+//        member.setTeam(this);  //양쪽에 모두 값을 입력 - 순수한 객체 관계를 고려
+//        members.add(member);
     }
 
     public Long getId() {
