@@ -20,13 +20,21 @@ public class JpaMain {
 
 
         try {
+            Address address = new Address("city", "street", "1000");
 
             Member member = new Member();
-            member.setUsername("hello");
-            member.setHomeAddress(new Address("city", "street", "1000"));
-            member.setWorkPeriod(new Period());
-
+            member.setUsername("member1");
+            member.setHomeAddress(address);
             em.persist(member);
+
+            Address copyAddress = new Address(address.getCity(), address.getStreet(), address.getZipcode());
+
+            Member member2 = new Member();
+            member2.setUsername("member2");
+            member2.setHomeAddress(copyAddress);
+            em.persist(member2);
+
+            member.getHomeAddress().setCity("newCity");
 
             tx.commit(); // 트랜잭션을 커밋하는 시점에서 영속성 컨텍스트에 있는 DB의 쿼리가 날라감
         } catch (Exception e) {
