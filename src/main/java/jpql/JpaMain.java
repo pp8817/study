@@ -24,8 +24,8 @@ public class JpaMain {
                     .getResultList();
 
             MemberDTO memberDTO = result.get(0);
-            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
-            System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
+//            System.out.println("memberDTO.getUsername() = " + memberDTO.getUsername());
+//            System.out.println("memberDTO.getAge() = " + memberDTO.getAge());
 
 
             tx.commit();
