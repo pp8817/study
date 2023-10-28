@@ -11,9 +11,17 @@ public class Member {
     private String username;
     private int age;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "TEAM_ID")//연관관계 주인, FK
     private Team team;
+
+    @Enumerated(EnumType.STRING)
+    private MemberType type;
+
+    public void changeTeam(Team team) { //연관관계 편의 메서드, 양방향 지정
+        this.team = team;
+        team.getMembers().add(this);
+    }
 
     public Long getId() {
         return id;
@@ -37,6 +45,22 @@ public class Member {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
+    public MemberType getType() {
+        return type;
+    }
+
+    public void setType(MemberType type) {
+        this.type = type;
     }
 
     @Override
