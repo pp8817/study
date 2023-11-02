@@ -26,6 +26,12 @@ public class Order {
     @JoinColumn(name = "member_id")
     private Member member; //연관관계의 주인
 
+    /**
+     * CascadeType.ALL은 OrderItem, Delivery를
+     *    1. Order에서만 참조하고 있고
+     *    2. Persist 해야하는 Life Cycle이 똑같이 때문에 CascadeType.ALL를 사용가능
+     * 다른 곳에서도 '참조'한다면 해당 옵션은 사용 X, Order를 삭제할 때 같이 삭제된다면 참조가 걸려있는 다른 곳에서 문제가 발생.
+     */
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>(); //연관관계 편의 메서드로 인해 주문한 상품들이 모여있음.
 
