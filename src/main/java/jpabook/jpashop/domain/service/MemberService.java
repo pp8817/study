@@ -11,7 +11,7 @@ import java.util.List;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService {
+public class MemberService { //Service는 단순이 위임만 하는 클랴스이다.
 
     private final MemberRepository memberRepository;
 
@@ -25,6 +25,9 @@ public class MemberService {
         return member.getId();
     }
 
+    /**
+     * 중복 회원 검사
+     */
     private void validateDuplicateMember(Member member) {
         //EXCEPTION
         List<Member> findMembers = memberRepository.findByName(member.getName());
