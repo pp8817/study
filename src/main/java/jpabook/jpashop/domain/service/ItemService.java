@@ -28,12 +28,15 @@ public class ItemService { //Service는 단순이 위임만 하는 클랴스이�
         return itemRepository.findOne(itemId);
     }
 
-    public void updateItem(Long id, String name, int price, int stockQuantity) {
-        Book book = (Book) itemRepository.findOne(id);
-        book.setName(name);
-        book.setPrice(price);
-        book.setStockQuantity(stockQuantity);
-
-        itemRepository.save(book);
+    @Transactional
+    public void updateItem(UpdateItemDto itemDto) {
+        Item findItem = itemRepository.findOne(itemDto.getId());
+        /**
+         * Dirty Checking 발생, 가능하다면 setter는 사용하지 않는 방법으로 구현
+         */
+//        findItem.setName(name);
+//        findItem.setPrice(price);
+//        findItem.setStockQuantity(stockQuantity);
+        findItem.modifyItem(itemDto.getName(), itemDto.getPrice(), itemDto.getStockQuantity());
     }
 }

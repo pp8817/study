@@ -47,4 +47,14 @@ public abstract class Item {
         }
         this.stockQuantity = restStock;
     }
+
+    /**
+     * 상품 수정, Dirty Checking 발생(업데이트 쿼리가 자동으로 나감)
+     * Setter를 사용하지 않기 위해 수정 메서드를 만듬
+     */
+    public void modifyItem(String name, int price, int stockQuantity) {
+        this.name = name;
+        this.price = price;
+        this.stockQuantity = stockQuantity;
+    }
 }
