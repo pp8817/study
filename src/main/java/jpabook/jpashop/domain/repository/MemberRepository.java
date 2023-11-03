@@ -23,7 +23,8 @@ public class MemberRepository {
 
     public List<Member> findAll() {
         //JPQL과 SQL의 차이점: JPQL은 from의 대상이 테이블이 아닌 엔티티
-        return em.createQuery("select m from Member m, Member.class") //JPQL 쿼리 사용
+
+        return em.createQuery("select m from Member m", Member.class)
                 .getResultList();
     }
 
