@@ -48,4 +48,10 @@ public class MemberService { //Service는 단순이 위임만 하는 클랴스�
     public Member findOne(Long memberId) {
         return memberRepository.findOne(memberId);
     }
+
+    @Transactional
+    public void update(Long id, String name) {
+        Member member = memberRepository.findOne(id);
+        member.setName(name);
+    }
 }
