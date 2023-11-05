@@ -9,12 +9,57 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotEmpty;
+import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Request, Response DTO 중첩 클래스를 만들 때 static을 붙이는 이유
+ *   1. 메모리 누수의 원인을 예방할 수 있고, 클래스의 각 인스턴스당 더 적은 메모리를 사용하게 된다.
+ *   2. static이 아닌 멤버 클래스는 바깥 인스턴스와 암묵적으로 연결이 되기 때문에 바깥 인스턴스 없이는 생성할 수 없다.
+ *
+ *   즉 멤버 클래스에서 바깥 인스턴스에 접근할 일이 없다면 무조건 static을 붙여 정적 멤버 클래스로 만들어주자!
+ */
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
 
     private final MemberService memberService;
+
+    /**
+     * 엔티티를 직접 노출하게 되면 엔티티에 있는 정보들이 다 외부에 노출이 된다.
+     * Json 요청시 반환하고 싶지 않은 변수, 값들에 @JsonIgnore를 사용하면 된다.
+     * 하지만 API마다 요청이 다를 수 있기 때문에 이는 좋은 방식이 아니다.
+     */
+    @GetMapping("/api/v1/members")
+    public List<Member> membersV1() {
+        return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberV2() {
+        List<Member> findMembers = memberService.findMembers();
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        return new Result(collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto {
+        private String name;
+
+//        public MemberDto(String name) {
+//            this.name = name;
+//        }
+    }
 
     /**
      * api를 만들 때 파라미터로 엔티티를 받게 되면 엔티티 속 변수들의 이름이 변경된다면 (name -> username)
