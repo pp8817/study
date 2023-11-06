@@ -55,6 +55,8 @@ public class MemberApiController {
      [ {Count}, {Data1}, {Data2}, {Data3} ,,] 이런 식으로 반환이 불가능하다. 리스트이기 때문에 Data와 Count객체가 동일해야한다.
      따라서, 좀 더 유연한 Json 객체 반환을 위해 { "count" : 3, "Data" : [ {Data1}, {Data2}, {Data3} ] } 이런 식으로 반환해주어야한다.
      그렇기 때문에 Result 클래스로 원하는 Json형태로 만들어 준 뒤 반환해주는 것이다.
+
+     -> 이해가 안된다면 PostMan으로 Result를 감싸기 전 후를 비교해보자.
      */
     @Data
     @AllArgsConstructor

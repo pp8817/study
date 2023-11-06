@@ -42,12 +42,27 @@ public class OrderSimpleApiController {
 
     @GetMapping("/api/v2/simple-orders")
     public Result ordersV2() {
-        //ORDER 2개 조회
-        //N+1 or 1+ 회원 N + 배송 N 문제 -> 총 5번의 쿼리가 실행, 조회되는 ORDER의 수가 늘어날수록 쿼리는 기하급수적으로 증
+        /**
+         * ORDER 2개 조회
+         * 1+N 문제: 1+ 회원 N + 배송 N 문제 -> 총 5번의 쿼리가 실행, 조회되는 ORDER의 수가 늘어날수록 쿼리는 기하급수적으로 증가
+         */
         List<Order> orders = orderRepository.findAllByCriteria(new OrderSearch());
+        List<SimpleOrderDto> result = orders.stream()
+                .map(o -> new SimpleOrderDto(o)) //DTO로 맵핑
+                .collect(Collectors.toList()); //LIST로 변환
+        return new Result(result); //Result로 감싸주기
+    }
+
+    @GetMapping("/api/v3/simple-orders")
+    public Result orderV3() {
+        /**
+         fetch join을 사용해서 쿼리가 1번 나감. V2에 비해서 쿼리문 갯수가 많이 감소.
+         */
+        List<Order> orders = orderRepository.findAllWithMemberDelivery();
         List<SimpleOrderDto> result = orders.stream()
                 .map(o -> new SimpleOrderDto(o))
                 .collect(Collectors.toList());
+
         return new Result(result);
     }
 
@@ -64,7 +79,7 @@ public class OrderSimpleApiController {
             this.name = order.getMember().getName(); //Lazy 초기화
             this.orderDate = order.getOrderDate();
             this.orderStatus = order.getStatus();
-            this.address = order.getDelivery().getAddress();
+            this.address = order.getDelivery().getAddress(); //Lazy 초기화
         }
     }
 

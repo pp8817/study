@@ -62,4 +62,15 @@ public class OrderRepository {
         return query.getResultList();
 
     }
+
+    public List<Order> findAllWithMemberDelivery() {
+        /**
+         한방 커리로 오더와 오더와 연관관계로 엮여있는 멤버와 딜리버리를 조인한 다음
+         설렉트 절에 다 넣고 레이지를 무시하고 한 번에 땡겨옴, 유사 즉시로딩
+         */
+        return em.createQuery("select o from Order o " +
+                " join fetch o.member m " +
+                " join fetch o.delivery d", Order.class)
+                .getResultList();
+    }
 }
