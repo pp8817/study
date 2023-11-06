@@ -1,4 +1,4 @@
-package jpabook.jpashop.domain.repository;
+package jpabook.jpashop.repository;
 
 import jpabook.jpashop.domain.Order;
 import lombok.RequiredArgsConstructor;
@@ -65,12 +65,29 @@ public class OrderRepository {
 
     public List<Order> findAllWithMemberDelivery() {
         /**
+         * Fetch join 활용
          한방 커리로 오더와 오더와 연관관계로 엮여있는 멤버와 딜리버리를 조인한 다음
          설렉트 절에 다 넣고 레이지를 무시하고 한 번에 땡겨옴, 유사 즉시로딩
+         재사용성이 좋음.
          */
         return em.createQuery("select o from Order o " +
                 " join fetch o.member m " +
                 " join fetch o.delivery d", Order.class)
                 .getResultList();
     }
+
+//    public List<OrderSimpleQueryDto> findOrderDtos() {
+//        /**
+//         원하는 값만 셀렉트해서 가져올 수 있음. 위보다 성능이 좋다.
+//         그러나 재사용성이 거의 없음.
+//
+//         API가 리포지토리에 있는 것과 마찬가지이며, 리포지토리의 순수성이 깨진다.
+//         */
+//        return em.createQuery("select new jpabook.jpashop.repository.OrderSimpleQueryDto(o.id, m.name, o.orderDate, o.status, d.address) " +
+//                        "from Order o " +
+//                        "join o.member m " +
+//                        "join o.delivery d", OrderSimpleQueryDto.class)
+//                .getResultList();
+//    }
+
 }

@@ -3,8 +3,10 @@ package jpabook.jpashop.api;
 import jpabook.jpashop.domain.Address;
 import jpabook.jpashop.domain.Order;
 import jpabook.jpashop.domain.OrderStatus;
-import jpabook.jpashop.domain.repository.OrderRepository;
-import jpabook.jpashop.domain.repository.OrderSearch;
+import jpabook.jpashop.repository.OrderRepository;
+import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto2;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +26,9 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 public class OrderSimpleApiController {
+
     private final OrderRepository orderRepository;
+    private final OrderSimpleQueryRepository orderSimpleQueryRepository;
 
     /**
      * 무한 루프에 빠지게 됨.
@@ -66,6 +70,23 @@ public class OrderSimpleApiController {
         return new Result(result);
     }
 
+    @GetMapping("/api/v4/simple-orders")
+    public Result orderV4() {
+        /**
+         JPA에서 DTO로 바로 조회
+         원하는 것만 셀렉트, 최적화 가능
+         But 재사용성이 떨어짐음
+         orderRepository에서 DTO를 조회하면 API가 리포지토리에 들어와 있는 것과 마찬가지고
+         리포지토리의 순수성이 깨지게 됨.
+         해결법: 성능 최적화된 쿼리용 리포지토리를 별도로 뽑는다.
+         */
+//        List<OrderSimpleQueryDto> orderDtos = orderRepository.findOrderDtos();
+//        return new Result(orderDtos);
+
+        List<OrderSimpleQueryDto2> new_orderDtos = orderSimpleQueryRepository.findOrderDtos();
+        return new Result(new_orderDtos);
+    }
+
     @Data
     static class SimpleOrderDto {
         private Long orderId;
@@ -87,6 +108,10 @@ public class OrderSimpleApiController {
     @AllArgsConstructor
     static class Result<T> {
         private T data;
+
+//        public Result(T data) {
+//            this.data = data;
+//        }
     }
 
 }
