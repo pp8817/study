@@ -59,7 +59,7 @@ public class MemberApiController {
     @Data
     @AllArgsConstructor
     static class Result<T> {
-        private int count; //Result 클래스로 컬렉션을 감싸준다면 Data의 갯수를 반환해달라는 요청을 유연하게 수행 가능하다.
+//        private int count; //Result 클래스로 컬렉션을 감싸준다면 Data의 갯수를 반환해달라는 요청을 유연하게 수행 가능하다.
         private T data;
     }
 
