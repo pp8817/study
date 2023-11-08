@@ -1,5 +1,6 @@
 package jpabook.jpashop.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jpabook.jpashop.domain.Member;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +23,7 @@ public class Order {
     @Column(name = "order_id")
     private Long id;
 
+    @JsonIgnore
     @ManyToOne(fetch = LAZY)
     @JoinColumn(name = "member_id")
     private Member member; //연관관계의 주인
@@ -32,9 +34,11 @@ public class Order {
      *    2. Persist 해야하는 Life Cycle이 똑같이 때문에 CascadeType.ALL를 사용가능
      * 다른 곳에서도 '참조'한다면 해당 옵션은 사용 X, Order를 삭제할 때 같이 삭제된다면 참조가 걸려있는 다른 곳에서 문제가 발생.
      */
+    @JsonIgnore
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<OrderItem> orderItems = new ArrayList<>(); //연관관계 편의 메서드로 인해 주문한 상품들이 모여있음.
 
+    @JsonIgnore
     @OneToOne(fetch = LAZY, cascade = CascadeType.ALL)
     @JoinColumn(name = "delivery_id")
     private Delivery delivery; //연관관계의 주인
