@@ -10,6 +10,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.hibernate.annotations.BatchSize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -92,8 +93,13 @@ public class OrderApiController {
      먼저 ToOne 관계를 모두 페치 조인한다. ToOne 관계는 row수를 증가시키지 않으므로 페이징 쿼리에 영향을 주지 않는다.
      컬렉션은 지연 로딩으로 조회한다.
      지연 로딩 성능 최적화를 위해 hibernate.default_batch_fetch_size, @BatchSize 를 적용한다.
-     - hibernate.default_batch_fetch_size: 글로벌 설정
-     - @BatchSize: 개별 최적화
+     - hibernate.default_batch_fetch_size: 글로벌 설정 (size는 100~1000 사이 권장)
+     - @BatchSize: 개별 최적화됨
+
+     쿼리 호출 수가 1+N -> 1+1로 최적화
+
+     결론: ToOne 관계는 패치 조인해도 페이징에 영향을 주지 않는다. 따라서 ToOne 관계는 fetch join으로 쿼리 수를 해결하고,
+     나머지는 hiberbate.dafault_batch_fetch_size로 최적화 하자.
      */
     @GetMapping("/api/v3.1/orders")
     public Result OrderV3_page(@RequestParam(value = "offset", defaultValue = "0") int offset,
