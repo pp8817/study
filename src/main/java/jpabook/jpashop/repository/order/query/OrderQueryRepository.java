@@ -6,13 +6,16 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 /**
  * OrderRepository의 경우 Order Entity를 조회하는 용도로 사용하는 것이고
- * OrderQueryRepository는 화면이나 API에 의존 관계가 있는 부분을 떼어내는 용도이다.서
+ * OrderQueryRepository는 화면이나 API에 의존 관계가 있는 부분을 떼어내는 용도이다.
+
+ *  orderRepository에서 DTO를 조회하면 API가 리포지토리에 들어와 있는 것과 마찬가지, 리포지토리의 순수성이 깨지게 됨.
 
  핵심 비즈니스를 위한 엔티티를 찾을 때 -> OrderRepository
  엔티티가 아닌 화면에 핏한 쿼리들을 이용할 때 -> OrderQueryRepository
@@ -82,6 +85,17 @@ public class OrderQueryRepository {
         result.forEach(o -> o.setOrderItems(orderItemMap.get(o.getOrderId())));
 
         return result;
+    }
+
+    public List<OrderFlatDto> findAllByDto_flat() {
+        return em.createQuery(
+                "select new jpabook.jpashop.repository.order.query.OrderFlatDto(o.id, m.name, o.orderDate, d.address, o.status, i.name, oi.orderPrice, oi.count)" +
+                        "from Order o " +
+                        "join o.member m " +
+                        "join o.delivery d " +
+                        "join o.orderItems oi " +
+                        "join oi.item i", OrderFlatDto.class)
+                .getResultList();
     }
 
     ///////////////////// Dto에서 사용되는 Query 조회 로직 ////////////////////

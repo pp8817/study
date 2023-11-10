@@ -6,6 +6,8 @@ import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.query.OrderFlatDto;
+import jpabook.jpashop.repository.order.query.OrderItemQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryRepository;
 import lombok.AllArgsConstructor;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -80,7 +83,7 @@ public class OrderApiController {
     public Result OrderV3() {
         List<Order> orders = orderRepository.findAllWithItem();
         List<OrderDto> collect = orders.stream()
-                .map(o -> new OrderDto(o))
+                .map(o -> new OrderDto(o)) //DTO로 감싸서 엔티티 직접 반환X
                 .collect(toList());
 
         return new Result(collect);
@@ -121,6 +124,8 @@ public class OrderApiController {
      * ToMany(1:N) 관계는 조인하면 row 수가 증가한다.
      row수가 증가 안하는 ToOne 관계는 조인으로 최적화 하기 쉬우므로 한번에 조회하고,
      ToMany 관계는 최적화 하기 어려우므로 findOrderItems()같은 별도의 메서드로 조회한다.
+
+     JPA에서 직접 DTO를 조회하면서 원하는 데이터만 셀렉트, 최적화 가능
      */
     @GetMapping("/api/v4/orders")
     public Result ordersV4() {
@@ -128,10 +133,39 @@ public class OrderApiController {
         return new Result(result); //Result로 감싸서 유연성 증가
     }
 
+    /**
+     V5: JPA에서 DTO로 바로 조회
+     쿼리 2번
+     - 페이징 가능
+     */
     @GetMapping("/api/v5/orders")
     public Result ordersV5() {
         List<OrderQueryDto> result = orderQueryRepository.findAllDto_optimization();
         return new Result(result);
+    }
+
+    /**
+     V6: JPA에서 DTO로 바로 조회, 플랫 데이터(10 Query) (1 Query)
+     쿼리 1번
+
+     *단점
+     - 쿼리는 한번이지만 조인으로 인해 DB에서 애플리케이션에 전달하는 데이터에 중복 데이터가 추가되므로 상황에 따라 V5보다 더 느릴수도 있다.
+     - 애플리케이션에서 추가 작업이 크다
+     - 페이징 불가능
+     */
+    @GetMapping("/api/v6/orders")
+    public Result ordersV6() {
+        List<OrderFlatDto> flats = orderQueryRepository.findAllByDto_flat();
+
+        List<OrderQueryDto> collect = flats.stream()
+                .collect(groupingBy(o -> new OrderQueryDto((o.getOrderId()), o.getName(), o.getOrderData(), o.getOrderStatus(), o.getAddress()),
+                        mapping(o -> new OrderItemQueryDto(o.getOrderId(), o.getItemName(), o.getOrderPrice(), o.getCount()), toList())
+                )).entrySet().stream()
+                .map(e -> new OrderQueryDto(e.getKey().getOrderId(), e.getKey().getName(), e.getKey().getOrderDate(), e.getKey().getOrderStatus(), e.getKey().getAddress(), e.getValue()))
+                .collect(toList());
+
+
+        return new Result(collect);
     }
 
     /*
