@@ -6,18 +6,20 @@ import jpabook.jpashop.domain.OrderItem;
 import jpabook.jpashop.domain.OrderStatus;
 import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
+import jpabook.jpashop.repository.order.query.OrderQueryDto;
+import jpabook.jpashop.repository.order.query.OrderQueryRepository;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto2;
+import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.annotations.BatchSize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.*;
 
@@ -26,6 +28,7 @@ import static java.util.stream.Collectors.*;
 public class OrderApiController {
 
     private final OrderRepository orderRepository;
+    private final OrderQueryRepository orderQueryRepository;
 
     /**
      * V1: 엔티티 직접 노출
@@ -112,6 +115,20 @@ public class OrderApiController {
         return new Result(collect);
     }
 
+
+    /**
+     Query: 루트 1번, 컬렉션 N번 -> 1+N 문제
+     ToOne(N:1, 1:1) 관계들을 먼저 조회하고, ToMany(1:N) 관계는 각각 별도로 처리한다.
+     * ToOne 관계는 조인해도 데이터 row 수가 증가하지 않는다.
+     * ToMany(1:N) 관계는 조인하면 row 수가 증가한다.
+     row수가 증가하지 않는 ToOne 관계는 조인으로 최적화 하기 쉬우므로 한번에 조회하고,
+     ToMany 관계는 최적화 하기 어려우므로 findOrderItems()같은 별도의 메서드로 조회한다.
+     */
+    @GetMapping("/api/v4/orders")
+    public Result ordersV4() {
+        List<OrderQueryDto> result = orderQueryRepository.findOrderQueryDtos();
+        return new Result(result);
+    }
 
 
     @Data

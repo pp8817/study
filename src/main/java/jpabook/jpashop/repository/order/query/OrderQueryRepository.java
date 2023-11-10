@@ -15,11 +15,8 @@ public class OrderQueryRepository {
 
     /**
      컬렉션은 별도로 조회
-<<<<<<< HEAD
      Query: 루트 1번, 컬렉션 N 번제 -> 1+N 문제가 생
-=======
      Query: 루트 1번, 컬렉션 N 번
->>>>>>> origin/main
      단건 조회에서 많이 사용하는 방식
      */
     public List<OrderQueryDto> findOrderQueryDtos() {
