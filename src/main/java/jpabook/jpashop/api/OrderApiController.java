@@ -113,7 +113,7 @@ public class OrderApiController {
         List<OrderDto> collect = orders.stream()
                 .map(o -> new OrderDto(o))
                 .collect(toList());
-        return new Result(collect);
+        return new Result(collect); //감싸기
     }
 
 
