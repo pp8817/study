@@ -36,7 +36,7 @@ public class OrderRepository {
     }
 
     /**
-     * JPA Criteria
+     * JPA Criteria: 검색용, 추후에 QueryDSL에서 보완
      */
     public List<Order> findAllByCriteria(OrderSearch orderSearch) {
         CriteriaBuilder cb = em.getCriteriaBuilder();

@@ -8,8 +8,6 @@ import jpabook.jpashop.repository.OrderRepository;
 import jpabook.jpashop.repository.OrderSearch;
 import jpabook.jpashop.repository.order.query.OrderQueryDto;
 import jpabook.jpashop.repository.order.query.OrderQueryRepository;
-import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryDto2;
-import jpabook.jpashop.repository.order.simplequery.OrderSimpleQueryRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Getter;
@@ -117,22 +115,36 @@ public class OrderApiController {
 
 
     /**
-     Query: 루트 1번, 컬렉션 N번 -> 1+N 문제
+     Query: 루트 1번, 컬렉션 N번 -> 1+N 문제 발생
      ToOne(N:1, 1:1) 관계들을 먼저 조회하고, ToMany(1:N) 관계는 각각 별도로 처리한다.
      * ToOne 관계는 조인해도 데이터 row 수가 증가하지 않는다.
      * ToMany(1:N) 관계는 조인하면 row 수가 증가한다.
-     row수가 증가하지 않는 ToOne 관계는 조인으로 최적화 하기 쉬우므로 한번에 조회하고,
+     row수가 증가 안하는 ToOne 관계는 조인으로 최적화 하기 쉬우므로 한번에 조회하고,
      ToMany 관계는 최적화 하기 어려우므로 findOrderItems()같은 별도의 메서드로 조회한다.
      */
     @GetMapping("/api/v4/orders")
     public Result ordersV4() {
         List<OrderQueryDto> result = orderQueryRepository.findOrderQueryDtos();
+        return new Result(result); //Result로 감싸서 유연성 증가
+    }
+
+    @GetMapping("/api/v5/orders")
+    public Result ordersV5() {
+        List<OrderQueryDto> result = orderQueryRepository.findAllDto_optimization();
         return new Result(result);
     }
 
+    /*
+    Result로 감싸는 이유
+     - 감싸지 않고 결과 DTO를 그대로 반환하면 배열로 결과가 나간다.
+     - 이런 경우 count, price 등의 데이터 추가가 불가하다.
+     - Result(가명)으로 감쌀 경우 필드에 'private int price', 'private int count' 등의 변수를 추가해서 유연성 증가를 노릴 수 있다.
 
+     @Data 어노테이션의 경우  @Setter, @Getter가 포함되어있다.
+     일반적인 상황에서는 @Setter가 위험성을 내포하고 있지만, Result는 단순히 값을 감싸는 용도로 사용하기 때문에 편의성을 위해서 자주 사용한다.
+     */
     @Data
-    @AllArgsConstructor
+    @AllArgsConstructor //private 변수를 생성자에 포함.
     static class Result<T> {
         private T data;
 
