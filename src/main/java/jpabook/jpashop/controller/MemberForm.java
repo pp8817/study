@@ -3,7 +3,7 @@ package jpabook.jpashop.controller;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotEmpty;
+//import javax.validation.constraints.NotEmpty;
 
 @Getter
 @Setter
@@ -12,7 +12,7 @@ import javax.validation.constraints.NotEmpty;
  */
 public class MemberForm {
 
-    @NotEmpty(message = "회원 이름은 필수입니다.") //Validation
+//    @NotEmpty(message = "회원 이름은 필수입니다.") //Validation
     private String name;
 
     private String city;
