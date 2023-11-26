@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import static hello.jdbc.connection.ConnectionConst.*;
 
 @Slf4j
-
 public class DBConnectionUtil {
 
     public static Connection getConnection() {
