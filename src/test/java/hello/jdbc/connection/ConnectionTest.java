@@ -50,5 +50,6 @@ public class ConnectionTest {
 
         log.info("connection = {}, class = {}", con1, con1.getClass());
         log.info("connection = {}, class = {}", con2, con2.getClass());
+        log.info("connection = {}, class = {}", con2, con2.getClass());
     }
 }
