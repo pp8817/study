@@ -16,7 +16,7 @@ import java.util.NoSuchElementException;
 @Slf4j
 public class MemberRepositoryV1 {
 
-    private final DataSource dataSource;
+    private final DataSource dataSource; //DataSource를 사용하면 편의성 상승
 
     public MemberRepositoryV1(DataSource dataSource) {
         this.dataSource = dataSource;
