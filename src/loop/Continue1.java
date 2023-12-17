@@ -8,6 +8,7 @@ public class Continue1 {
                 i++;
                 continue; }
             System.out.println(i);
-            i++; }
+            i++;
+        }
     }
 }
