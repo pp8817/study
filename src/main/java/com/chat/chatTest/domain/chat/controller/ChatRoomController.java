@@ -43,6 +43,6 @@ public class ChatRoomController {
                                       Member member) {
         ChatRoom chatRoom = chatRoomService.findRoom(roomId);
 
-        return new ResponseEntity<>(chatRoom, HttpStatus.OK);
+        return new ResponseEntity<>(chatRoom.getRoomId(), HttpStatus.OK);
     }
 }
