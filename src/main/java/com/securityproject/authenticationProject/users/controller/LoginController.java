@@ -1,4 +1,4 @@
-package com.securityproject.authenticationProject.controller;
+package com.securityproject.authenticationProject.users.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,4 +11,8 @@ public class LoginController {
         return "login/login";
     }
 
+    @GetMapping("/signup")
+    public String signup() {
+        return "login/signup";
+    }
 }
