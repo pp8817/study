@@ -29,7 +29,7 @@ public class FormAuthenticationProvider implements AuthenticationProvider {
         }
 
         String secretKey = ((FormAuthenticationDetails) authentication.getDetails()).getSecretKey();
-        if (secretKey == null || secretKey.equals("secret")) {
+        if (secretKey == null || !secretKey.equals("secret")) {
             throw new SecretException("Invalid secret");
         }
 

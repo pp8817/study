@@ -99,7 +99,6 @@
                 </div>
                 <form th:action="@{/login}" method="post">
                     <input type="hidden" th:value="secret" th:name="secret_key"/>
-                    <input type="hidden" th:value="secret" name="secret_key" />
                     <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control" id="username" name="username" required>
