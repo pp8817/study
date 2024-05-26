@@ -1,5 +1,6 @@
 package com.securityproject.authenticationProject.users.domain.dto;
 
+import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 public class AccountContext implements UserDetails {
 
+    @Getter
     private final AccountDto accountDto;
     private final List<GrantedAuthority> authorities;
 
