@@ -1,2 +1,2 @@
-# deep_learning_lab
+# Class_VisionAI_Lab_20516041_sangmin_park
 vision_lab
