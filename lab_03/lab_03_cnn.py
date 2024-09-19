@@ -18,7 +18,7 @@
 # 
 # * `__getitem__` 을 구현하여 dataset[i] 와 같은 인덱싱에서 i번째 샘플을 리턴한다.
 
-# In[3]:
+# In[52]:
 
 
 import torch
@@ -29,7 +29,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 
-# In[4]:
+# In[53]:
 
 
 class CustomDatasetExample(Dataset):
@@ -49,7 +49,7 @@ class CustomDatasetExample(Dataset):
 # 
 # * 이미지를 읽는데에는 [PIL.Image.open](https://pillow.readthedocs.io/en/stable/reference/Image.html) 함수를 사용할 것.
 
-# In[7]:
+# In[60]:
 
 
 from PIL import Image
@@ -74,9 +74,10 @@ class CustomImageDataset(Dataset):
 
     def __getitem__(self, idx):
         ##### YOUR CODE START #####  
-        img_path = os.path.join(self.root_dir, self.metadata_df.iloc[idx, 0])
-        image = Image.open(img_path).convert('RGB')
-        label_str = self.metadata_df.iloc[idx, 1]
+        img_path = os.path.join(self.root_dir, self.metadata_df["image_path"].iloc[idx])
+        image = Image.open(img_path)
+        label_str = self.metadata_df['label'].iloc[idx]
+    
         ##### YOUR CODE END #####
 
         label = self.class_to_idx[label_str] # encode label to integer
@@ -89,7 +90,7 @@ class CustomImageDataset(Dataset):
         return image, label
 
 
-# In[9]:
+# In[62]:
 
 
 def visualize_samples(dataset, cols=8, rows=5):
@@ -121,7 +122,7 @@ def visualize_samples(dataset, cols=8, rows=5):
 # 
 # 아래 예시는 label imbalance를 해결하기 위해 각 class로 부터 같은 숫자의 샘플들을 추출하는 샘플러이다.
 
-# In[115]:
+# In[32]:
 
 
 from torch.utils.data import Sampler
@@ -169,7 +170,7 @@ class BalancedSampler(Sampler):
 # - AverageMeter를 사용하여 학습 metric을 추적
 # - save_checkpoint와 load_checkpoint를 이용하여 모델을 저장하고 불러오는 기능 추가
 
-# In[117]:
+# In[34]:
 
 
 import os, time, shutil
@@ -187,7 +188,7 @@ from tqdm import tqdm
 import wandb
 
 
-# In[118]:
+# In[35]:
 
 
 def load_MNIST_datasets(data_root_dir):
@@ -207,7 +208,7 @@ def load_MNIST_datasets(data_root_dir):
     return train_dataset, test_dataset
 
 
-# In[119]:
+# In[36]:
 
 
 def create_dataloaders(train_dataset, test_dataset, device, batch_size, num_worker):
@@ -225,7 +226,7 @@ def create_dataloaders(train_dataset, test_dataset, device, batch_size, num_work
     return train_dataloader, test_dataloader
 
 
-# In[ ]:
+# In[37]:
 
 
 class AverageMeter(object):
@@ -297,7 +298,7 @@ def load_checkpoint(filepath, model, optimizer, device):
         return 0, 0
 
 
-# In[144]:
+# In[38]:
 
 
 def train_loop(model, device, dataloader, criterion, optimizer, epoch):
@@ -345,7 +346,7 @@ def train_loop(model, device, dataloader, criterion, optimizer, epoch):
     ##### YOUR CODE END #####
 
 
-# In[145]:
+# In[39]:
 
 
 def evaluation_loop(model, device, dataloader, criterion, epoch = 0):
@@ -380,7 +381,7 @@ def evaluation_loop(model, device, dataloader, criterion, epoch = 0):
     return acc_top1.avg
 
 
-# In[146]:
+# In[40]:
 
 
 class MultiLayerPerceptron(nn.Module):
@@ -405,7 +406,7 @@ class MultiLayerPerceptron(nn.Module):
         return logits
 
 
-# In[171]:
+# In[41]:
 
 
 def train_main_MLP():
@@ -530,7 +531,7 @@ def train_main_MLP():
 # * Fully connected layer with 64 output units and ReLU activation
 # * Fully connected layer with 10 output units 
 
-# In[176]:
+# In[46]:
 
 
 class SimpleCNN(nn.Module):
@@ -569,7 +570,7 @@ class SimpleCNN(nn.Module):
 
 # <mark>과제</mark> 학습을 수행하여 MLP 모델과의 결과를 비교하라.
 
-# In[178]:
+# In[48]:
 
 
 def train_main_CNN():
@@ -646,6 +647,60 @@ def train_main_CNN():
         wandb.finish()
 
     ##### YOUR CODE END #####
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
 
 
 # In[ ]:
