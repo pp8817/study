@@ -1,0 +1,441 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ac5f0aa3-7142-4c5a-b0e3-d714a33af614" name="Changes" comment="[refactor] Member">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/springJpaBoard/Board/domain/like/model/Like.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/springJpaBoard/Board/domain/like/model/Like.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/springJpaBoard/Board/user/controller/AuthApiTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/springJpaBoard/Board/user/controller/AuthApiTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <task path="$PROJECT_DIR$">
+          <activation />
+        </task>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feat/Exception" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;pp8817&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="recentNewPullRequestHead">
+      <RepoCoordinatesHolder>
+        <option name="owner" value="pp8817" />
+        <option name="repository" value="JpaBoard" />
+      </RepoCoordinatesHolder>
+    </option>
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="5fbb4180-8952-451f-a2e9-ff95c289e25c" />
+        <option name="url" value="https://github.com/pp8817/JpaBoard.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 8
+}</component>
+  <component name="ProjectId" id="2bJu9EcPalVhvVdNw1B9vMCs049" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "last_opened_file_path": "/Users/sangmin8817/Desktop/DEV/Board",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "vcs.Git",
+    "spring.configuration.checksum": "226160abf295f1e4df3fa7af26b90864",
+    "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
+  }
+}]]></component>
+  <component name="RecentsManager">
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="springJpaBoard.Board.domain.comment.exception" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Spring Boot.BoardApplication">
+    <configuration name="Board [clean]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="clean" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>false</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommentApiControllerTest" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;springJpaBoard.Board.comment.controller.CommentApiControllerTest&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="CommentApiControllerTest.댓글_삭제_댓글_정보_X" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;springJpaBoard.Board.comment.controller.CommentApiControllerTest.댓글_삭제_댓글_정보_X&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'Board.test'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="Tests in 'springJpaBoard.Board'" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+            <option value="--tests" />
+            <option value="&quot;springJpaBoard.Board.*&quot;" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <ExternalSystemDebugServerProcess>false</ExternalSystemDebugServerProcess>
+      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
+      <DebugAllEnabled>false</DebugAllEnabled>
+      <RunAsTest>true</RunAsTest>
+      <method v="2" />
+    </configuration>
+    <configuration name="BoardApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UpdateClassesAndResources" />
+      <module name="Board.main" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="springJpaBoard.Board.BoardApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.Tests in 'Board.test'" />
+        <item itemvalue="Gradle.Tests in 'springJpaBoard.Board'" />
+        <item itemvalue="Gradle.CommentApiControllerTest.댓글_삭제_댓글_정보_X" />
+        <item itemvalue="Gradle.CommentApiControllerTest" />
+        <item itemvalue="Gradle.Board [clean]" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task id="LOCAL-00001" summary=" 파일 수정">
+      <option name="closed" value="true" />
+      <created>1705945271057</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1705945271057</updated>
+    </task>
+    <task id="LOCAL-00002" summary=" 파일 수정">
+      <option name="closed" value="true" />
+      <created>1705945276293</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1705945276293</updated>
+    </task>
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac5f0aa3-7142-4c5a-b0e3-d714a33af614" name="Changes" comment=" 파일 수정" />
+      <created>1705945349462</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1705945349462</updated>
+      <workItem from="1705945350861" duration="409000" />
+      <workItem from="1705979189313" duration="29000" />
+      <workItem from="1705990406778" duration="753000" />
+      <workItem from="1706682258104" duration="27000" />
+      <workItem from="1706853112061" duration="619000" />
+      <workItem from="1706945000096" duration="106000" />
+      <workItem from="1706945572322" duration="42000" />
+      <workItem from="1707048725145" duration="145000" />
+      <workItem from="1707048896424" duration="11000" />
+      <workItem from="1707048942153" duration="18000" />
+      <workItem from="1707049011384" duration="36000" />
+      <workItem from="1707049121686" duration="20000" />
+      <workItem from="1707051662537" duration="12000" />
+      <workItem from="1707051677304" duration="30000" />
+      <workItem from="1707052138759" duration="24000" />
+      <workItem from="1707052224814" duration="58000" />
+      <workItem from="1707052398017" duration="134000" />
+      <workItem from="1707052990373" duration="52000" />
+      <workItem from="1707053044636" duration="11000" />
+      <workItem from="1707117941553" duration="51000" />
+      <workItem from="1707118384868" duration="12000" />
+      <workItem from="1707118586061" duration="7000" />
+      <workItem from="1707118731113" duration="36000" />
+      <workItem from="1707119179542" duration="16000" />
+      <workItem from="1707119524598" duration="22000" />
+      <workItem from="1707119798272" duration="35000" />
+      <workItem from="1707122524663" duration="20000" />
+      <workItem from="1707222312547" duration="87000" />
+      <workItem from="1707223465790" duration="24000" />
+      <workItem from="1707223717151" duration="27000" />
+      <workItem from="1707455346637" duration="52000" />
+      <workItem from="1707455584059" duration="8000" />
+      <workItem from="1707455631924" duration="1000" />
+      <workItem from="1707495855449" duration="25000" />
+      <workItem from="1707543827167" duration="210000" />
+      <workItem from="1707630241978" duration="73000" />
+      <workItem from="1707635831089" duration="73000" />
+      <workItem from="1707636095693" duration="6000" />
+      <workItem from="1707899689866" duration="1215000" />
+      <workItem from="1707902636605" duration="16000" />
+      <workItem from="1709460874627" duration="18000" />
+    </task>
+    <task id="LOCAL-00003" summary=" 파일 수정">
+      <option name="closed" value="true" />
+      <created>1705945737098</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1705945737098</updated>
+    </task>
+    <task id="LOCAL-00004" summary=" 파일 수정">
+      <option name="closed" value="true" />
+      <created>1705945755167</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705945755167</updated>
+    </task>
+    <task id="LOCAL-00005" summary=" 파일 수정">
+      <option name="closed" value="true" />
+      <created>1705979205318</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1705979205318</updated>
+    </task>
+    <task id="LOCAL-00006" summary=" 파일 수정">
+      <option name="closed" value="true" />
+      <created>1706517980917</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1706517980917</updated>
+    </task>
+    <task id="LOCAL-00007" summary="gitignore 파일 생성">
+      <option name="closed" value="true" />
+      <created>1706518320381</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1706518320381</updated>
+    </task>
+    <task id="LOCAL-00008" summary=".">
+      <option name="closed" value="true" />
+      <created>1706518409609</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1706518409609</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Comment 엔티티 클래스에 대한 예외 클래스 생성">
+      <option name="closed" value="true" />
+      <created>1706518722530</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1706518722530</updated>
+    </task>
+    <task id="LOCAL-00010" summary="[refactor] CommentService 코드 예외 처리 수정">
+      <option name="closed" value="true" />
+      <created>1706518744159</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1706518744159</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[refactor] Comment 코드 예외 처리 수정">
+      <option name="closed" value="true" />
+      <created>1706520513446</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1706520513446</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[refactor] CommentService 코드 예외 처리 수정">
+      <option name="closed" value="true" />
+      <created>1706520941711</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1706520941711</updated>
+    </task>
+    <task id="LOCAL-00013" summary="[refactor] CommentService 코드 예외 처리 수정">
+      <option name="closed" value="true" />
+      <created>1706521174514</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1706521174514</updated>
+    </task>
+    <task id="LOCAL-00014" summary="[refactor] Member">
+      <option name="closed" value="true" />
+      <created>1706945604540</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1706945604540</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value=" 파일 수정" />
+    <MESSAGE value="gitignore 파일 생성" />
+    <MESSAGE value="." />
+    <MESSAGE value="Comment 엔티티 클래스에 대한 예외 클래스 생성" />
+    <MESSAGE value="[refactor] Comment 코드 예외 처리 수정" />
+    <MESSAGE value="[refactor] CommentService 코드 예외 처리 수정" />
+    <MESSAGE value="[refactor] Member" />
+    <option name="LAST_COMMIT_MESSAGE" value="[refactor] Member" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/Board$BoardApplication__1_.ic" NAME="BoardApplication (1) Coverage Results" MODIFIED="1700665606356" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>springJpaBoard.Board.*</FILTER>
+    </SUITE>
+  </component>
+</project>
