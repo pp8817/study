@@ -1,0 +1,53 @@
+/*style코드는 html문법임. 이 스타일 태그 안에 있는 내용들은 css로 처리하라고 명령하는 문법임
+#이 들어간 부분은 id라는 선택자임. 이 선택자는 가장 우선순위가 되며 다른 구간에서 중복되어 사용 불가.
+자세한 설명은 인터넷 검색. .saw라 되어 있는 부분은 body부분에 정의한 클래스를 지칭하는 것임. 클래스를 지칭할 때는
+무조건 앞에 .을 붙여줘야함. 파이썬처럼 선택자 속성이 동일하다면 나중에 나온 명령이 우선시 되지만 선택자가 다를 경우에는
+id(#)>>.(class)>>p등의 일반 선택자순으로 명령이 우선시 됨. 모르거나 까먹는게 생긴다면 구글 검  */
+body {
+  margin:0;
+}
+a {
+  color:pink;
+  text-decoration: none;
+}
+#active{
+  color:blue;
+}
+.saw{
+  color:gray;
+
+}
+
+h1 {
+  font-size: 55px;
+  text-align: center;
+  border-bottom:2px gray solid;
+  margin:0;
+  padding:20px
+}
+ol{
+  font-size: 20px;
+  border-right: 2px gray solid;
+  width:100px;
+  margin:0;
+  padding:30px;
+  padding-left: 38px;
+}
+#grid{
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+#grid #article{
+  font-style:oblique;
+}
+@media(max-width:850px){
+  #grid{
+    display: block;
+   }
+  #grid ol{
+    border-right: none;
+  }
+  h1{
+    border-bottom:none;
+  }
+ }
