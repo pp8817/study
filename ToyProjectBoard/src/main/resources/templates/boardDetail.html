@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>게시글 상세</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+            max-width: 720px; /* 변경된 너비 */
+            width: 100%;
+            height: 480px; /* 변경된 높이 */
+            overflow: auto; /* 스크롤을 표시하기 위한 설정 */
+            padding: 40px;
+        }
+        .btn-group {
+            position: absolute;
+            top: 10px; /* 간격 조정 */
+            right: 20px;
+        }
+        .btn {
+            padding: 5px 10px; /* 변경된 padding 값 */
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-left: 10px;
+        }
+        .btn-delete {
+            background-color: #dc3545;
+        }
+        .btn-edit {
+            background-color: #ffc107;
+        }
+
+        .time {
+            float: left; /* 시간을 왼쪽으로 띄움 */
+            clear: both; /* 시간 위에 다른 요소가 없도록 */
+            margin-right: 10px; /* 시간과 내용 사이 간격 추가 */
+            position: absolute;
+            top: 10px; /* 간격 조정 */
+        }
+
+        .title {
+            text-align: center;
+        }
+
+        .author {
+            border-bottom: 2px solid #ccc; /* 구분선 스타일 추가 */
+            padding-bottom: 10px; /* 구분선과 내용 간격 조정 */
+            margin-bottom: 20px; /* 제목 아래 여백 추가 */
+        }
+
+    </style>
+</head>
+<body>
+
+
+<div class="container">
+
+    <div class="btn-group">
+        <a class="btn btn-delete" th:text="#{button.delete}" th:href="@{/board/post/delete/{id}(id=${post.id})}">게시글 삭제</a>
+        <a class="btn btn-edit" th:text="#{button.modified}" th:href="@{/board/post/update/{id}(id=${post.id})}">게시글 수정</a>
+        <a class="btn" th:text="#{button.list}" th:href="@{/board/list}">목록으로 돌아가기</a>
+    </div>
+
+    <div class="post">
+        <h2 class="title" th:text="${post.title}">게시글 제목</h2>
+
+        <p class="author" th:text="#{label.author}+': ' + ${post.author}" >작성자: 작성자 이름</p>
+
+        <div class="time"> <!-- 변경된 부분 -->
+            <span th:if="${post.getCreatedDate() == post.getModifiedDate()}"
+                  th:text="#{label.createdDate}+': '  + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+            <span th:if="${post.getCreatedDate() != post.getModifiedDate()}"
+                  th:text="#{label.createdDate}+': ' + ${#temporals.format(post.getCreatedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+            <br>
+            <span th:if="${post.getCreatedDate() != post.getModifiedDate()}"
+                  th:text="#{label.modifiedDate}+': ' + ${#temporals.format(post.getModifiedDate(), 'yyyy.MM.dd / HH:mm:ss')}"></span>
+        </div>
+
+        <p class="content" th:text="#{label.content} +': ' + ${post.content}">내용: 게시글 내용...</p>
+<!--        <a th:href="@{${post.filepath}}">첨부파일 기능 구현중..</a>-->
+        <span th:if="${post.filepath != null}">
+            <img th:src="@{'/images/' + ${post.filepath}}" width="300" height="300"/><br>
+            <!--   파일 다운로드   -->
+            사진 다운로드: <a th:href="|/attach/${post.id}|" th:text="${post.getFilename()}"/>
+        </span>
+
+    </div>
+
+</div>
+</body>
+</html>
